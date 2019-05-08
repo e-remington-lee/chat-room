@@ -16,6 +16,9 @@ import { ChatroomComponent } from './chatroom/chatroom.component';
     AppRoutingModule,
     FormsModule
   ],
+  exports: [
+    ChatroomComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
