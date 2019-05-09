@@ -17,12 +17,13 @@
                 <div class='col-8'>
                         <div class='card' id='textBox'>
                                 <div class='card-body'>
-                                    <h3 class='card-text'>Text Box</h3>
-                                    <p>{{this.sendText}}</p>
+                                    <h3 class='card-text'>It change</h3>
+                                    <p>{{entry.user.a}}: {{entry.user.b}}</p>
                                 </div>
+                            </div>
+                            <div>
+                                <input class='form-control' id='searchBox'[(ngModel)]='inputText' placeholder="What would you like to say?" (keyup.enter)='onEnter()'> 
                             </div>  
-                            <input class='form-control' id='searchBox'[(ngModel)]='inputText' placeholder="What would you like to say?" (keyup.enter)='onEnter()'> 
-                            
                 </div>
             </div>
     </div>
