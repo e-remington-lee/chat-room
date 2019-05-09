@@ -63,7 +63,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-person></app-person>\n"
+module.exports = "<app-chatroom></app-chatroom>\n"
 
 /***/ }),
 
@@ -148,6 +148,9 @@ var AppModule = /** @class */ (function () {
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"]
             ],
+            exports: [
+                _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_6__["ChatroomComponent"]
+            ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
@@ -166,7 +169,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n    <p>\n        Python flask is serving angular!\n     </p>\n</body>\n"
+module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n                <div class='card'>\n                    <div class='card-body'>\n                        <h3 class='card-text'>Chat Application</h3>\n                    </div>\n                </div>\n    </div>\n</body>\n</html>\n"
 
 /***/ }),
 

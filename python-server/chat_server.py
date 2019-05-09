@@ -4,12 +4,13 @@ from flask import Flask, jsonify, render_template, send_from_directory
 app = Flask(__name__)
 # api = Api(app)
 
-# @app.route('/templates/index.html')
-# def hello():
-#     return send_from_directory('/templates', "index.html")
+@app.route('/templates/<bb>')
+def routers(bb):
+        print(bb)
+        return send_from_directory('templates', bb)
 
 @app.route('/')
-def hello():
+def root_server():
         return render_template('index.html')
 
 # api.add_resource(Angular, '/')
@@ -22,4 +23,4 @@ def hello():
 # api.add_resource(Second, '/2')
 
 if __name__  == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=8002)

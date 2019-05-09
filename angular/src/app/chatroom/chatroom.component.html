@@ -1,5 +1,29 @@
+<html>
 <body>
-    <p>
-        Python flask is serving angular!
-     </p>
+    <div class='container-fluid'>
+        <div class='card' id='title'>
+            <div class='card-body'>
+                <h3 class='card-text'>Chat Application</h3>
+            </div>
+        </div>
+        <div class='row'>
+                <div class='col-4' id='userBox'>
+                        <div class='card'>
+                                <div class='card-body'>
+                                    <h3 class='card-text'>Usernames</h3>
+                                </div>
+                            </div> 
+                </div>
+                <div class='col-8' id='textBox'>
+                        <div class='card'>
+                                <div class='card-body'>
+                                    <h3 class='card-text'>Text Box</h3>
+                                </div>
+                            </div>    
+                </div>
+            </div>
+        <input class='form-control' id='searchBox'[(ngModel)]='inputText' placeholder="What would you like to say?" (keyup.enter)='onEnter()'>
+    </div>
+
 </body>
+</html>

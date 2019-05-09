@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatroomComponent implements OnInit {
 
+  inputText: string;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onEnter(){
+    console.log(this.inputText);
   }
 
 }
