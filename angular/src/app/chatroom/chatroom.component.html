@@ -10,16 +10,15 @@
                 <div class='col-4'>
                         <div class='card'id='userBox'>
                                 <div class='card-body'>
-                                    <h3 class='card-text'>Active Users</h3>
-                                    <p *ngFor='let msg of info'>{{msg.firstName}}</p>
+                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>
+                                    <p *ngFor='let msg of info'>{{msg.userName}}</p>
                                 </div>
                             </div> 
                 </div>
                 <div class='col-8'>
                         <div class='card' id='textBox'>
                                 <div class='card-body'>
-                                    <h3 class='card-text'>It change</h3>
-                                    <p>{{this.userName}}{{this.sendText}}</p>
+                                    <p *ngFor='let msg of info'>{{msg.userName}}{{msg.message}}</p>
                                 </div>
                             </div>
                             <div>

@@ -18,9 +18,9 @@ export class ChatroomComponent implements OnInit {
     //probably some message box asking you to login
   this.info = 
    [
-      {"firstName":"John", "lastName":"Doe"}, 
-      {"firstName":"Anna", "lastName":"Smith"},
-      {"firstName":"Peter", "lastName":"Jones"}
+      {"userName":"Remington", "message":": " + "hi"}, 
+      {"userName":"Blaine", "message":": " + "hey"},
+      {"userName":"Bob", "message":": "+"??"}
     ]
     }   
   

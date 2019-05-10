@@ -1,12 +1,24 @@
 #title {
     margin: 10px 0 10px 0;
 }
+// #userBox {
+//     height: 700px;
+// }
+
+// #textBox {
+//     height: 650px;
+// }
+
+#activeUsers {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
 #userBox {
-    height: 700px;
+    height: 450px;
 }
 
 #textBox {
-    height: 650px;
+    height: 400px;
 }
 #searchBox {
     margin: 10px 0 10px 0;
