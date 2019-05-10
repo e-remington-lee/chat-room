@@ -10,7 +10,8 @@
                 <div class='col-4'>
                         <div class='card'id='userBox'>
                                 <div class='card-body'>
-                                    <h3 class='card-text'>Usernames</h3>
+                                    <h3 class='card-text'>Active Users</h3>
+                                    <p *ngFor='let msg of info'>{{msg.firstName}}</p>
                                 </div>
                             </div> 
                 </div>
@@ -18,7 +19,7 @@
                         <div class='card' id='textBox'>
                                 <div class='card-body'>
                                     <h3 class='card-text'>It change</h3>
-                                    <p>{{entry.user.a}}: {{entry.user.b}}</p>
+                                    <p>{{this.userName}}{{this.sendText}}</p>
                                 </div>
                             </div>
                             <div>

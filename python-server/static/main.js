@@ -169,7 +169,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h3 class='card-text'>Chat Application</h3>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text'>Usernames</h3>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text'>It change</h3>\n                                    <p>{{entry.user.a}}: {{entry.user.b}}</p>\n                                </div>\n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox'[(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
+module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h3 class='card-text'>Chat Application</h3>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text'>Active Users</h3>\n                                    <p>{{this.userName}}</p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text'>It change</h3>\n                                    <p>{{this.userName}}{{this.sendText}}</p>\n                                </div>\n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox'[(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -180,7 +180,7 @@ module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#userBox {\n  height: 450px; }\n\n#textBox {\n  height: 400px; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBRXpCO0VBQ0ksYUFBYSxFQUFBOztBQUdqQjtFQUNJLGFBQWEsRUFBQTs7QUFFakI7RUFDSSxxQkFBcUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NoYXRyb29tL2NoYXRyb29tLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3RpdGxlIHtcclxuICAgIG1hcmdpbjogMTBweCAwIDEwcHggMDtcclxufVxyXG4jdXNlckJveCB7XHJcbiAgICBoZWlnaHQ6IDQ1MHB4O1xyXG59XHJcblxyXG4jdGV4dEJveCB7XHJcbiAgICBoZWlnaHQ6IDQwMHB4O1xyXG59XHJcbiNzZWFyY2hCb3gge1xyXG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xyXG59Il19 */"
+module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#userBox {\n  height: 800px; }\n\n#textBox {\n  height: 750px; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBRXpCO0VBQ0ksYUFBYSxFQUFBOztBQUdqQjtFQUNJLGFBQWEsRUFBQTs7QUFFakI7RUFDSSxxQkFBcUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NoYXRyb29tL2NoYXRyb29tLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3RpdGxlIHtcclxuICAgIG1hcmdpbjogMTBweCAwIDEwcHggMDtcclxufVxyXG4jdXNlckJveCB7XHJcbiAgICBoZWlnaHQ6IDgwMHB4O1xyXG59XHJcblxyXG4jdGV4dEJveCB7XHJcbiAgICBoZWlnaHQ6IDc1MHB4O1xyXG59XHJcbiNzZWFyY2hCb3gge1xyXG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xyXG59Il19 */"
 
 /***/ }),
 
@@ -202,15 +202,11 @@ var ChatroomComponent = /** @class */ (function () {
     function ChatroomComponent() {
     }
     ChatroomComponent.prototype.ngOnInit = function () {
-        this.userName = 'Blaine';
+        //probably some message box asking you to login    
     };
     ChatroomComponent.prototype.onEnter = function () {
-        this.info = {
-            "user": [
-                { "a": this.userName, "b": this.inputText }
-            ]
-        };
-        this.sendText = this.inputText;
+        this.sendText = ': ' + this.inputText;
+        this.userName = 'Blaine';
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

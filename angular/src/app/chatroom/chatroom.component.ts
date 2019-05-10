@@ -15,17 +15,19 @@ export class ChatroomComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.userName='Blaine';
-  }
+    //probably some message box asking you to login
+  this.info = 
+   [
+      {"firstName":"John", "lastName":"Doe"}, 
+      {"firstName":"Anna", "lastName":"Smith"},
+      {"firstName":"Peter", "lastName":"Jones"}
+    ]
+    }   
+  
 
   onEnter(){
-    this.info = {
-      "user":[
-        {"a": this.userName, "b": this.inputText}
-      ]
-    }
-
-    this.sendText = this.inputText;
+    this.sendText = ': '+ this.inputText;
+    this.userName='Blaine';
   }
 
 }
