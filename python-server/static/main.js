@@ -169,7 +169,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h3 class='card-text'>Chat Application</h3>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text'>Active Users</h3>\n                                    <p>{{this.userName}}</p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text'>It change</h3>\n                                    <p>{{this.userName}}{{this.sendText}}</p>\n                                </div>\n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox'[(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
+module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h3 class='card-text'>Chat Application</h3>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let msg of info'>{{msg.userName}}</p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <p *ngFor='let msg of info'>{{msg.userName}}{{msg.message}}</p>\n                                </div>\n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -180,7 +180,7 @@ module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#userBox {\n  height: 800px; }\n\n#textBox {\n  height: 750px; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBRXpCO0VBQ0ksYUFBYSxFQUFBOztBQUdqQjtFQUNJLGFBQWEsRUFBQTs7QUFFakI7RUFDSSxxQkFBcUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NoYXRyb29tL2NoYXRyb29tLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3RpdGxlIHtcclxuICAgIG1hcmdpbjogMTBweCAwIDEwcHggMDtcclxufVxyXG4jdXNlckJveCB7XHJcbiAgICBoZWlnaHQ6IDgwMHB4O1xyXG59XHJcblxyXG4jdGV4dEJveCB7XHJcbiAgICBoZWlnaHQ6IDc1MHB4O1xyXG59XHJcbiNzZWFyY2hCb3gge1xyXG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xyXG59Il19 */"
+module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#activeUsers {\n  border-bottom: 1px solid black;\n  padding-bottom: 5px; }\n\n#userBox {\n  height: 450px; }\n\n#textBox {\n  height: 400px; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBVXpCO0VBQ0ksOEJBQThCO0VBQzlCLG1CQUFtQixFQUFBOztBQUV2QjtFQUNJLGFBQWEsRUFBQTs7QUFHakI7RUFDSSxhQUFhLEVBQUE7O0FBRWpCO0VBQ0kscUJBQXFCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jaGF0cm9vbS9jaGF0cm9vbS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiN0aXRsZSB7XHJcbiAgICBtYXJnaW46IDEwcHggMCAxMHB4IDA7XHJcbn1cclxuLy8gI3VzZXJCb3gge1xyXG4vLyAgICAgaGVpZ2h0OiA3MDBweDtcclxuLy8gfVxyXG5cclxuLy8gI3RleHRCb3gge1xyXG4vLyAgICAgaGVpZ2h0OiA2NTBweDtcclxuLy8gfVxyXG5cclxuI2FjdGl2ZVVzZXJzIHtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBibGFjaztcclxuICAgIHBhZGRpbmctYm90dG9tOiA1cHg7XHJcbn1cclxuI3VzZXJCb3gge1xyXG4gICAgaGVpZ2h0OiA0NTBweDtcclxufVxyXG5cclxuI3RleHRCb3gge1xyXG4gICAgaGVpZ2h0OiA0MDBweDtcclxufVxyXG4jc2VhcmNoQm94IHtcclxuICAgIG1hcmdpbjogMTBweCAwIDEwcHggMDtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -202,7 +202,13 @@ var ChatroomComponent = /** @class */ (function () {
     function ChatroomComponent() {
     }
     ChatroomComponent.prototype.ngOnInit = function () {
-        //probably some message box asking you to login    
+        //probably some message box asking you to login
+        this.info =
+            [
+                { "userName": "Remington", "message": ": " + "hi" },
+                { "userName": "Blaine", "message": ": " + "hey" },
+                { "userName": "Bob", "message": ": " + "??" }
+            ];
     };
     ChatroomComponent.prototype.onEnter = function () {
         this.sendText = ': ' + this.inputText;

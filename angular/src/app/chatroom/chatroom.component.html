@@ -3,7 +3,7 @@
     <div class='container-fluid'>
         <div class='card' id='title'>
             <div class='card-body'>
-                <h3 class='card-text'>Chat Application</h3>
+                <h2 class='card-text'>Chat Application</h2>
             </div>
         </div>
         <div class='row'>
@@ -11,18 +11,18 @@
                         <div class='card'id='userBox'>
                                 <div class='card-body'>
                                     <h3 class='card-text' id='activeUsers'>Active Users</h3>
-                                    <p *ngFor='let msg of info'>{{msg.userName}}</p>
+                                    <p *ngFor='let msg of info'><b>{{msg.userName}}</b></p>
                                 </div>
                             </div> 
                 </div>
                 <div class='col-8'>
                         <div class='card' id='textBox'>
                                 <div class='card-body'>
-                                    <p *ngFor='let msg of info'>{{msg.userName}}{{msg.message}}</p>
+                                    <p *ngFor='let msg of info'><b>{{msg.userName}}</b>{{msg.message}}</p>
                                 </div>
                             </div>
                             <div>
-                                <input class='form-control' id='searchBox'[(ngModel)]='inputText' placeholder="What would you like to say?" (keyup.enter)='onEnter()'> 
+                                <input class='form-control' id='searchBox' [(ngModel)]='inputText' placeholder="What would you like to say?" (keyup.enter)='onEnter()'> 
                             </div>  
                 </div>
             </div>
