@@ -19,8 +19,12 @@ info ='''{"message_history": [
                 "message":"Danny may have forgot about the Iron Fleet, but the Iron Fleet didn't forget about her"
                 },
                 {"id": 4,
-                "username":"David Benioff",
-                "message":"Duplicate user test"
+                "username":"Duplicate Test",
+                "message":"Test message"
+                },
+                 {"id": 5,
+                "username":"Duplicate Test",
+                "message":"Test message 2"
                 }
        ]
 }
@@ -50,13 +54,15 @@ def get_post_messages():
 def find_create_users():
         if request.method =='GET':
                 all_users =[]
-                
+                id = 1
+
                 for user in json_data['message_history']:
-                        all_users.append(user['username'])
+                        all_users.append({"username": user['username'], "id":id})
+                        id += 1
 
-                unique_users = list(set(all_users))
+                # unique_users = list(set(all_users))
 
-                return jsonify(unique_users)
+                return jsonify(all_users)
         elif request.method =='POST':
                 data = request.get_json()
                 username = data['username']
