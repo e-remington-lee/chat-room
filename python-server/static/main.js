@@ -169,7 +169,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h3 class='card-text'>Chat Application</h3>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let msg of info'>{{msg.userName}}</p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <p *ngFor='let msg of info'>{{msg.userName}}{{msg.message}}</p>\n                                </div>\n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
+module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h2 class='card-text'>Chat Application</h2>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b></p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b>{{msg.message}}</p>\n                                </div>\n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -205,14 +205,20 @@ var ChatroomComponent = /** @class */ (function () {
         //probably some message box asking you to login
         this.info =
             [
-                { "userName": "Remington", "message": ": " + "hi" },
-                { "userName": "Blaine", "message": ": " + "hey" },
-                { "userName": "Bob", "message": ": " + "??" }
+                { "id": 1,
+                    "username": "Nobody",
+                    "message": ": " + "..." },
+                { "id": 2,
+                    "username": "Literally No one",
+                    "message": ": " + "..." },
+                { "id": 3,
+                    "username": "David Benioff",
+                    "message": ": " + "Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her" }
             ];
     };
     ChatroomComponent.prototype.onEnter = function () {
         this.sendText = ': ' + this.inputText;
-        this.userName = 'Blaine';
+        this.username = 'Blaine';
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

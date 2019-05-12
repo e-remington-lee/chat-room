@@ -9,7 +9,7 @@ export class ChatroomComponent implements OnInit {
 
   inputText: string;
   sendText: string;
-  userName: string;
+  username: string;
   info: Object;
 
   constructor() { }
@@ -17,17 +17,23 @@ export class ChatroomComponent implements OnInit {
   ngOnInit() {
     //probably some message box asking you to login
   this.info = 
-   [
-      {"userName":"Nobody", "message":": " + "..."}, 
-      {"userName":"Literally No one", "message":": " + "..."},
-      {"userName":"David Benioff", "message":": "+"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"}
+    [
+      {"id": 1,
+        "username":"Nobody",
+       "message":": " + "..."}, 
+      {"id": 2,
+        "username":"Literally No one",
+       "message":": " + "..."},
+      {"id": 3,
+        "username":"David Benioff",
+       "message":": "+"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"}
     ]
     }   
   
 
   onEnter(){
     this.sendText = ': '+ this.inputText;
-    this.userName='Blaine';
+    this.username='Blaine';
   }
 
 }
