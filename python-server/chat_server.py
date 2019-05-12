@@ -4,7 +4,8 @@ import json
 
 app = Flask(__name__)
 # api = Api(app)
-info =[
+info ='''
+        [
         {"id": 1,
         "username":"Nobody",
        "message":"..."}, 
@@ -15,10 +16,11 @@ info =[
         "username":"David Benioff",
        "message":"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"}
        ]
+       '''
 
      
-# json_data = json.loads(info)
-# print(type(json_data))
+json_data = json.loads(info)
+print(type(json_data))
 
 @app.route('/')
 def root_server():
