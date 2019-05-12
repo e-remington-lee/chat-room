@@ -4,23 +4,21 @@ import json
 
 app = Flask(__name__)
 # api = Api(app)
-info ='''
-        [
-        {"id": 1,
-        "username":"Nobody",
-       "message":"..."}, 
-       {"id": 2,
-        "username":"Literally No one",
-       "message":"..."},
-       {"id": 3,
-        "username":"David Benioff",
-       "message":"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"}
+info ='''{"message_history": [{"id": 1,"username":"Nobody","message":"..."},
+                {"id": 2,"username":"Literally No one","message":"..."
+                },{"id": 3,"username":"David Benioff","message":"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"
+                },{"id": 4,"username":"David Benioff",
+                "message":"Duplicate user test"
+                }
        ]
-       '''
+}
+'''
 
      
 json_data = json.loads(info)
-print(type(json_data))
+
+print(type(json_data['message_history']))
+
 
 @app.route('/')
 def root_server():
@@ -29,7 +27,7 @@ def root_server():
 @app.route('/messages', methods=['GET', 'POST'])
 def get_post_messages():
         if request.method =='GET':
-                return jsonify(info)
+                return jsonify(json_data)
         elif request.method =='POST':
                 data = request.get_json()
 
@@ -37,14 +35,16 @@ def get_post_messages():
                 message = data['message']
                 id = len(info)+1
 
-                info.append({"username":username, "message":message, "id":id})
-                return jsonify(info), 201
+                json_data['message_history'].append({"username":username, "message":message, "id":id})
+                return jsonify(json_data), 201
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
+        for person in json_data['message_history']:
+                print(person['username'])
         if request.method =='GET':
-                json_users = json.loads(info)
-                return json_users['username']
+                for person in info:
+                        return jsonify(person)
         elif request.method =='POST':
                 return 0
 
