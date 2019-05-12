@@ -12,11 +12,8 @@ info ='''{"message_history": [{"id": 1,"username":"Nobody","message":"..."},{"id
        ]
 }
 '''
-
-     
+  
 json_data = json.loads(info)
-
-print(type(json_data['message_history']))
 
 @app.route('/')
 def root_server():
@@ -28,27 +25,25 @@ def get_post_messages():
                 return jsonify(json_data)
         elif request.method =='POST':
                 data = request.get_json()
-
                 username = data['username']
                 message = data['message']
-                id = len(info)+1
+                id = len(json_data['message_history'])+1
 
                 json_data['message_history'].append({"username":username, "message":message, "id":id})
+                
                 return jsonify(json_data), 201
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
-        for m in json_data['message_history']:
-                print(m['username'])
         if request.method =='GET':
-                all_users ='''
-                        {"user_list": []
-
-                        }
-                '''
+                all_users =[]
+                
                 for message in json_data['message_history']:
-                        all_users['user_list'].append(message['username'])
-                        return all_users
+                        all_users.append(message['username'])
+
+                unique_users = list(set(all_users))
+
+                return jsonify(unique_users), print(unique_users)
         elif request.method =='POST':
                 return None
 
