@@ -4,46 +4,47 @@ import json
 
 app = Flask(__name__)
 # api = Api(app)
-info = {"id": 1,
+info =[
+        {"id": 1,
         "username":"Nobody",
-       "message":"..."}, {"id": 2,
+       "message":"..."}, 
+       {"id": 2,
         "username":"Literally No one",
-       "message":"..."},{"id": 3,
+       "message":"..."},
+       {"id": 3,
         "username":"David Benioff",
        "message":"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"}
-     
+       ]
 
-json_data = json.dumps(info)
+     
+# json_data = json.loads(info)
+# print(type(json_data))
 
 @app.route('/')
 def root_server():
         return render_template('index.html')
 
-@app.route('/messages', methods=['GET'])
-def get_users():
-        return jsonify(info)
+@app.route('/messages', methods=['GET', 'POST'])
+def get_post_messages():
+        if request.method =='GET':
+                return jsonify(info)
+        elif request.method =='POST':
+                data = request.get_json()
 
-@app.route('/messages', methods=['POST'])
-def add_message():
+                username = data['username']
+                message = data['message']
+                id = len(info)+1
 
-        data = request.get_json()
+                info.append({"username":username, "message":message, "id":id})
+                return jsonify(info), 201
 
-        username = data['username']
-        message = data['message']
-        id = data['id']
-
-        # json_data.update({"username":username, "message":message, "id":id})
-        # return json_data
-
-        #how do I add a dictonary to already existing json data
-        return jsonify({"id": 1,
-        "username":"Nobody",
-       "message":"..."}, {"id": 2,
-        "username":"Literally No one",
-       "message":"..."},{"id": 3,
-        "username":"David Benioff",
-       "message":"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"},{"username":username, "message":message, "id":id})
-        
+@app.route('/users', methods=['GET','POST'])
+def find_create_users():
+        if request.method =='GET':
+                json_users = json.loads(info)
+                return json_users['username']
+        elif request.method =='POST':
+                return 0
 
 if __name__  == '__main__':
     app.run(debug=True, port=8000)
