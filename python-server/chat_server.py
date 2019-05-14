@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request
+import requests
 import json
 
 app = Flask(__name__)
@@ -60,7 +61,7 @@ def find_create_users():
                         all_users.append({"username": user['username'], "id":id})
                         id += 1
 
-                # unique_users = list(set(all_users))
+                 # unique_users = list(set(all_users))
 
                 return jsonify(all_users)
         elif request.method =='POST':
@@ -70,11 +71,10 @@ def find_create_users():
                 json_data['message_history'].append({"username":username})
                 return jsonify(json_data), 201
 
-@app.route('/messages/*', methods=['GET'])
+@app.route('/messages/q={"filters":[{"name":"id","op":"eq", "val":2}]}', methods=['GET'])
 def find_specific_user():
-
-
-        return None
+        if request.method == 'GET':
+                return request.get_json()
 
 if __name__  == '__main__':
     app.run(debug=True, port=8000)
