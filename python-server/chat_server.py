@@ -4,35 +4,26 @@ import json
 
 app = Flask(__name__)
 
-info ='''{"message_history": [
-                {
-                "id": 1,
-                "username":"Nobody",
-                "message":"..."
-                },
-                {"id": 2,
-                "username":"Literally No one",
-                "message":"..."
-                },
-                {
-                "id": 3,
-                "username":"David Benioff",
-                "message":"Danny may have forgot about the Iron Fleet, but the Iron Fleet didn't forget about her"
-                },
-                {"id": 4,
-                "username":"Duplicate Test",
-                "message":"Test message"
-                },
-                 {"id": 5,
-                "username":"Duplicate Test",
-                "message":"Test message 2"
-                }
-       ]
-}
-'''
-  
-json_data = json.loads(info)
+user_list = []
+user_list.append({"id": 1,"username":"Nobody"})
+user_list.append({"id": 2,"username":"Literally No One"})
+user_list.append({"id": 3,"username":"David Benioff"})
+user_list.append({"id": 4,"username":"Duplicate"})
 
+user_data = {
+        "user_list": user_list
+}
+
+message_history = []
+message_history.append({"id": 1,"username":"Nobody","message":"..."})
+message_history.append({"id": 2,"username":"Literally No One","message":"..."})
+message_history.append({"id": 3,"username":"David Benioff","message":"Danny may have forgot about the Iron Fleet, but the Iron Fleet didn't forget about her"})
+message_history.append({"id": 4,"username":"Duplicate","message":"Test 1"})
+message_history.append({"id": 5,"username":"Duplicate","message":"Test 2"})
+
+message_data ={
+        "message_history": message_history
+}
 @app.route('/')
 def root_server():
         return render_template('index.html')
@@ -40,36 +31,29 @@ def root_server():
 @app.route('/messages', methods=['GET', 'POST'])
 def get_post_messages():
         if request.method =='GET':
-                return jsonify(json_data)
+                return jsonify(message_data)
         elif request.method =='POST':
                 data = request.get_json()
                 username = data['username']
                 message = data['message']
-                id = len(json_data['message_history'])+1
+                id = len(message_data['message_history'])+1
 
-                json_data['message_history'].append({"username":username, "message":message, "id":id})
+                message_data['message_history'].append({"username":username, "message":message, "id":id})
                 
-                return jsonify(json_data), 201
+                return jsonify(message_data), 201
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
         if request.method =='GET':
-                all_users =[]
-                id = 1
-
-                for user in json_data['message_history']:
-                        all_users.append({"username": user['username'], "id":id})
-                        id += 1
-
-                 # unique_users = list(set(all_users))
-
-                return jsonify(all_users)
+                return jsonify(user_data)
         elif request.method =='POST':
                 data = request.get_json()
                 username = data['username']
+                id = len(user_data["user_list"])+1
 
-                json_data['message_history'].append({"username":username})
-                return jsonify(json_data), 201
+                user_data['user_list'].append({"username":username, "id":id})
+
+                return jsonify(user_data), 201
 
 @app.route('/messages/q={"filters":[{"name":"id","op":"eq", "val":2}]}', methods=['GET'])
 def find_specific_user():
