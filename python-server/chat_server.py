@@ -53,8 +53,6 @@ def find_create_users():
 
                         return jsonify({"error": "User Not Found"}), 404
                 else:
-                        print(q)
-                        print(request.query_string)
                         return jsonify(user_data)
         elif request.method =='POST':
                 data = request.get_json()
