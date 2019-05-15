@@ -51,7 +51,7 @@ def find_create_users():
                                 if str(user['user_id']) == q:
                                         return jsonify(user)
 
-                        return jsonify({"user_id":"N/A", "username": "Not Found"}), 404
+                        return jsonify({"error": "User Not Found"}), 404
                 else:
                         print(q)
                         print(request.query_string)
