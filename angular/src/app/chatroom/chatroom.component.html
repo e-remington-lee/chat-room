@@ -11,14 +11,14 @@
                         <div class='card'id='userBox'>
                                 <div class='card-body'>
                                     <h3 class='card-text' id='activeUsers'>Active Users</h3>
-                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b></p>
+                                    <p *ngFor='let user of userList'><b>{{user.username}}</b></p>
                                 </div>
                             </div> 
                 </div>
                 <div class='col-8'>
                         <div class='card' id='textBox'>
                                 <div class='card-body'>
-                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b>{{msg.message}}</p>
+                                    <p *ngFor='let msg of messageList'><b>{{msg.user.username}}: </b>{{msg.message}}</p>
                                 </div> 
                             </div>
                             <div>
