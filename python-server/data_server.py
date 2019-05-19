@@ -14,12 +14,27 @@ connect = psycopg2.connect(
 timestamp = datetime.datetime.now()
 user_databse = 'users'
 user_id = 7
-username = 'Derek'
+username = 'Dr. E'
 cursor = connect.cursor()
 
-cursor.execute(f"INSERT INTO {user_databse} VALUES ({user_id}, '{username}, {timestamp}')")
+def create_message():
+    return None
 
-select_all = f'select * from {user_databse}'
+def create_user():
+    return None
+
+def get_all_messages():
+    return None
+
+def find_specific_user():
+    return None
+
+def get_all_users():
+    return None
+
+cursor.execute(f"INSERT INTO {user_databse} VALUES ({user_id}, '{username}')")
+
+select_all = f'select * from {user_databse} WHERE user_id={user_id}'
 
 cursor.execute(select_all)
 rows = cursor.fetchall()
