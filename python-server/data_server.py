@@ -60,8 +60,8 @@ def get_all_users():
         'user_list': users
     }
 
-    # cursor.close()
-    # connect.close()
+    cursor.close()
+    connect.close()
 
     print(user_list['user_list'])
     return user_list['user_list']
