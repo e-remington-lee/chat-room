@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { dataService } from '../data-service.service';
+  
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
@@ -8,11 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class ChatroomComponent implements OnInit {
 
   inputText: string;
-  sendText: string;
   username: string;
   info: Object;
 
-  constructor() { }
+  constructor(private data: dataService) { }
 
   ngOnInit() {
     //probably some message box asking you to login
@@ -32,8 +32,9 @@ export class ChatroomComponent implements OnInit {
   
 
   onEnter(){
-    this.sendText = ': '+ this.inputText;
-    this.username='Blaine';
+    console.log(this.inputText)
+    this.data.writeMessage()
+
   }
 
 }

@@ -19,7 +19,7 @@
                         <div class='card' id='textBox'>
                                 <div class='card-body'>
                                     <p *ngFor='let msg of info'><b>{{msg.username}}</b>{{msg.message}}</p>
-                                </div>
+                                </div> 
                             </div>
                             <div>
                                 <input class='form-control' id='searchBox' [(ngModel)]='inputText' placeholder="What would you like to say?" (keyup.enter)='onEnter()'> 
