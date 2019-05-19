@@ -10,36 +10,25 @@ export class ChatroomComponent implements OnInit {
 
   inputText: string;
   username: string;
-  info: Object;
+  messageList: Object;
+  userList: Object;
   newMessage: Object;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
     //probably some message box asking you to login
-  this.info = 
-    [
-      {"id": 1,
-        "username":"Nobody",
-       "message":": " + "..."}, 
-      {"id": 2,
-        "username":"Literally No one",
-       "message":": " + "..."},
-      {"id": 3,
-        "username":"David Benioff",
-       "message":": "+"Danny forgot about the Iron Fleet but the Iron Fleet didn't forget about her"}
-    ]
-    }   
-  
+    this.data.message_list().subscribe(data => {
+      this.messageList = data;
+      console.log(this.messageList);
+    }); 
 
+    this.data.user_list().subscribe(data => {
+      this.userList = data;
+    });
+  }
+  
   onEnter(){
     console.log(this.inputText)
-    this.data.writeMessage(this.inputText).subscribe(data => {
-      this.newMessage = data;
-      console.log(this.newMessage);
-    });
-    
-
-  }
-
+}
 }

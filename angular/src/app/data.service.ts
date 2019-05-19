@@ -13,7 +13,11 @@ export class DataService {
   //   return this.http.get('/messages', info)
   // }
 
-  writeMessage() {
+  message_list() {
     return this.http.get('/messages');
+  }
+
+  user_list() {
+    return this.http.get('/users');
   }
 }
