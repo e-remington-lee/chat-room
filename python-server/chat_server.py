@@ -33,7 +33,7 @@ def root_server():
 @app.route('/messages', methods=['GET', 'POST'])
 def get_post_messages():
         if request.method =='GET':
-                return jsonify(message_data)
+                return jsonify(message_data['message_history'])
         elif request.method =='POST':
                 data = request.get_json()
                 user = data['user']
@@ -55,7 +55,7 @@ def find_create_users():
 
                         return jsonify({"Error": "User Not Found"}), 404
                 else:
-                        return jsonify(user_data)
+                        return jsonify(user_data['user_list'])
         elif request.method =='POST':
                 data = request.get_json()
                 username = data['username']

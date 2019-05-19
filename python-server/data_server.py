@@ -12,7 +12,7 @@ connect = psycopg2.connect(
 
 #how was I supposed to know the host, I just guessed at localhost
 timestamp = datetime.datetime.now()
-user_databse = 'users'
+user_databse = 'messages'
 user_id = 7
 username = 'Dr. E'
 cursor = connect.cursor()
@@ -32,16 +32,22 @@ def find_specific_user():
 def get_all_users():
     return None
 
-cursor.execute(f"INSERT INTO {user_databse} VALUES ({user_id}, '{username}')")
+# cursor.execute(f"INSERT INTO {user_databse} VALUES ({user_id}, '{username}')")
 
-select_all = f'select * from {user_databse} WHERE user_id={user_id}'
+select_all = f'select * from {user_databse}'
 
 cursor.execute(select_all)
 rows = cursor.fetchall()
 
-for r in rows:
-    print(r)
+messages =[]
+for row in rows:
+    messages.append({'id': row[0], 'username': row[1], 'message': row[3]})
 
+message_list = {
+    'message_list': messages
+}
+
+print(message_list['message_list'])
 # connect.commit()
 cursor.close()
 connect.close()
