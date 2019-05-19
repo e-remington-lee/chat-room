@@ -124,9 +124,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chatroom/chatroom.component */ "./src/app/chatroom/chatroom.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chatroom/chatroom.component */ "./src/app/chatroom/chatroom.component.ts");
+
 
 
 
@@ -140,19 +142,20 @@ var AppModule = /** @class */ (function () {
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_6__["ChatroomComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
+                _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_7__["ChatroomComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"]
             ],
             exports: [
-                _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_6__["ChatroomComponent"]
+                _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_7__["ChatroomComponent"]
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -169,7 +172,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h2 class='card-text'>Chat Application</h2>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b></p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b>{{msg.message}}</p>\n                                </div>\n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
+module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card' id='title'>\n            <div class='card-body'>\n                <h2 class='card-text'>Chat Application</h2>\n            </div>\n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card'id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b></p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div class='card-body'>\n                                    <p *ngFor='let msg of info'><b>{{msg.username}}</b>{{msg.message}}</p>\n                                </div> \n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='inputText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n    </div>\n\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -196,10 +199,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatroomComponent", function() { return ChatroomComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data.service */ "./src/app/data.service.ts");
+
 
 
 var ChatroomComponent = /** @class */ (function () {
-    function ChatroomComponent() {
+    function ChatroomComponent(data) {
+        this.data = data;
     }
     ChatroomComponent.prototype.ngOnInit = function () {
         //probably some message box asking you to login
@@ -217,8 +223,12 @@ var ChatroomComponent = /** @class */ (function () {
             ];
     };
     ChatroomComponent.prototype.onEnter = function () {
-        this.sendText = ': ' + this.inputText;
-        this.username = 'Blaine';
+        var _this = this;
+        console.log(this.inputText);
+        this.data.writeMessage(this.inputText).subscribe(function (data) {
+            _this.newMessage = data;
+            console.log(_this.newMessage);
+        });
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -226,9 +236,49 @@ var ChatroomComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./chatroom.component.html */ "./src/app/chatroom/chatroom.component.html"),
             styles: [__webpack_require__(/*! ./chatroom.component.scss */ "./src/app/chatroom/chatroom.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"]])
     ], ChatroomComponent);
     return ChatroomComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/data.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/data.service.ts ***!
+  \*********************************/
+/*! exports provided: DataService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+var DataService = /** @class */ (function () {
+    function DataService(http) {
+        this.http = http;
+    }
+    // writeMessage(message) {
+    //   const info = { params: new HttpParams().set('q', message)}
+    //   return this.http.get('/messages', info)
+    // }
+    DataService.prototype.writeMessage = function () {
+        return this.http.get('/messages');
+    };
+    DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], DataService);
+    return DataService;
 }());
 
 
