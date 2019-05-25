@@ -22,14 +22,14 @@ def create_user():
     return None
 
 def get_all_messages():
-    select_all = f'select * from {message_database}'
+    select_all = f'select * from messages inner join users on messages.user_id = users.user_id'
 
     cursor.execute(select_all)
     rows = cursor.fetchall()
 
     messages =[]
     for row in rows:
-        messages.append({'id': row[0], 'user': {'user_id': row[4], 'username': row[1]}, 'message': row[2]})
+        messages.append({'message_id': row[0], 'user': {'user_id': row[3], 'username': row[5]}, 'message': row[1]})
 
     message_list = {
         'message_list': messages
@@ -54,7 +54,7 @@ def get_all_users():
 
     users =[]
     for row in rows:
-        users.append({'id': row[0], 'username': row[1], 'timestamp': row[2]})
+        users.append({'user_id': row[0], 'username': row[1], 'timestamp': row[2]})
 
     user_list = {
         'user_list': users
@@ -77,4 +77,4 @@ def main ():
 #     main()
 
 get_all_messages()
-# get_all_users()
+get_all_users()
