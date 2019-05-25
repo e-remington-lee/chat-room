@@ -7,6 +7,7 @@ import datetime
 #how was I supposed to know the host, I just guessed at localhost
 user_database = 'users'
 message_database = 'messages'
+time = datetime.datetime.now()
 
 def create_connection():
     return psycopg2.connect(
@@ -16,7 +17,14 @@ def create_connection():
         password = "Bob!3489")
 
 
-def create_message():
+def create_message(user_id, message, message_id):
+    connect = create_connection()
+    cursor = connect.cursor()
+
+    cursor.execute(f"INSERT INTO messages (message_id, message, user_id) VALUES ({message_id}, '{message}', {user_id})")
+    connect.commit()
+    cursor.close()
+    connect.close()
     return None
 
 def create_user():

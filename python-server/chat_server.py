@@ -2,7 +2,7 @@ from flask import Flask, jsonify, render_template, request
 import requests
 import json
 import sqlalchemy
-from data_server import get_all_messages, get_all_users
+from data_server import get_all_messages, get_all_users, create_message
 
 app = Flask(__name__)
 
@@ -37,13 +37,12 @@ def get_post_messages():
         elif request.method =='POST':
                 data = request.get_json()
                 user_id = data['user']['user_id']
-                username = data['user']['username']
                 message = data['message']
-                id = len(message_data['message_history'])+1
+                message_id = len(get_all_messages())+1
 
-                message_data['message_history'].append({"user": {"user_id": user_id, "username": username}, "message":message, "id":id})
+                create_message(user_id, message, message_id)
                 
-                return jsonify(message_data), 201
+                return jsonify(get_all_messages()), 201
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
