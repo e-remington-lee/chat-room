@@ -36,11 +36,12 @@ def get_post_messages():
                 return jsonify(get_all_messages())
         elif request.method =='POST':
                 data = request.get_json()
-                user = data['user']
+                user_id = data['user']['user_id']
+                username = data['user']['username']
                 message = data['message']
                 id = len(message_data['message_history'])+1
 
-                message_data['message_history'].append({"user":user, "message":message, "id":id})
+                message_data['message_history'].append({"user": {"user_id": user_id, "username": username}, "message":message, "id":id})
                 
                 return jsonify(message_data), 201
 

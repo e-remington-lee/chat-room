@@ -1,14 +1,19 @@
 import psycopg2
 import sqlalchemy
 import datetime
-from sql_info import password
+
 
 
 #how was I supposed to know the host, I just guessed at localhost
 user_database = 'users'
 message_database = 'messages'
 
-
+def create_connection():
+    return psycopg2.connect(
+        host = "localhost",
+        database = "Chat_room",
+        user = "postgres",
+        password = "Bob!3489")
 
 
 def create_message():
@@ -18,12 +23,7 @@ def create_user():
     return None
 
 def get_all_messages():
-    connect = psycopg2.connect(
-        host = "localhost",
-        database = "Chat_room",
-        user = "postgres",
-        password = password())
-
+    connect = create_connection()
     cursor = connect.cursor()
 
     select_all = f'select * from messages inner join users on messages.user_id = users.user_id'
@@ -51,12 +51,7 @@ def find_specific_user():
     return None
 
 def get_all_users():
-    connect = psycopg2.connect(
-        host = "localhost",
-        database = "Chat_room",
-        user = "postgres",
-        password = "Bob!3489")
-    
+    connect = create_connection()
     cursor = connect.cursor()
 
     select_all = f'select * from {user_database}'
