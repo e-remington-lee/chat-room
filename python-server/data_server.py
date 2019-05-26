@@ -7,7 +7,6 @@ import datetime
 #how was I supposed to know the host, I just guessed at localhost
 user_database = 'users'
 message_database = 'messages'
-time = datetime.datetime.now()
 
 def create_connection():
     return psycopg2.connect(
@@ -56,7 +55,6 @@ def get_all_messages():
     cursor.close()
     connect.close()
 
-    print(message_list['message_list'])
     return message_list['message_list']
 
 
@@ -85,7 +83,6 @@ def get_all_users():
     cursor.close()
     connect.close()
 
-    print(user_list['user_list'])
     return user_list['user_list']
 
 
