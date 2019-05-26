@@ -18,9 +18,8 @@ export class ChatroomComponent implements OnInit {
 
   ngOnInit() {
     //probably some message box asking you to login
-    this.data.message_list().subscribe(data => {
+    this.data.message_list(this.inputText).subscribe(data => {
       this.messageList = data;
-      console.log(this.messageList);
     }); 
 
     this.data.user_list().subscribe(data => {

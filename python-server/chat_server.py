@@ -2,30 +2,11 @@ from flask import Flask, jsonify, render_template, request
 import requests
 import json
 import sqlalchemy
-from data_server import get_all_messages, get_all_users
+from data_server import get_all_messages, get_all_users, create_message, create_user
 
 app = Flask(__name__)
 
-user_list = []
-user_list.append({"user_id": 1,"username":"Nobody"})
-user_list.append({"user_id": 2,"username":"Literally No One"})
-user_list.append({"user_id": 3,"username":"David Benioff"})
-user_list.append({"user_id": 4,"username":"Duplicate"})
 
-user_data = {
-        "user_list": user_list
-}
-
-message_history = []
-message_history.append({"id": 1,"user":{"user_id": 1,"username":"Nobody"},"message":"..."})
-message_history.append({"id": 2,"user":{"user_id": 2,"username":"Literally No One"},"message":"..."})
-message_history.append({"id": 3,"user":{"user_id": 3,"username":"David Benioff"},"message":"Danny may have forgot about the Iron Fleet, but the Iron Fleet didn't forget about her"})
-message_history.append({"id": 4,"user":{"user_id": 4,"username":"Duplicate"},"message":"Test 1"})
-message_history.append({"id": 5,"user":{"user_id": 4,"username":"Duplicate"},"message":"Test 2"})
-
-message_data ={
-        "message_history": message_history
-}
 @app.route('/')
 def root_server():
         return render_template('index.html')
@@ -37,13 +18,12 @@ def get_post_messages():
         elif request.method =='POST':
                 data = request.get_json()
                 user_id = data['user']['user_id']
-                username = data['user']['username']
                 message = data['message']
-                id = len(message_data['message_history'])+1
+                message_id = len(get_all_messages())+1
 
-                message_data['message_history'].append({"user": {"user_id": user_id, "username": username}, "message":message, "id":id})
+                create_message(user_id, message, message_id)
                 
-                return jsonify(message_data), 201
+                return jsonify(get_all_messages()), 201
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
@@ -60,11 +40,11 @@ def find_create_users():
         elif request.method =='POST':
                 data = request.get_json()
                 username = data['username']
-                id = len(user_data["user_list"])+1
+                user_id = len(get_all_users())+1
 
-                user_data['user_list'].append({"username":username, "user_id":id})
+                create_user(user_id, username)
 
-                return jsonify(user_data), 201
+                return jsonify(get_all_users()), 201
 
 if __name__  == '__main__':
     app.run(debug=True, port=8000)

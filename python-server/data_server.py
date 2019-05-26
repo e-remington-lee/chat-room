@@ -16,10 +16,24 @@ def create_connection():
         password = "Bob!3489")
 
 
-def create_message():
+def create_message(user_id, message, message_id):
+    connect = create_connection()
+    cursor = connect.cursor()
+
+    cursor.execute(f"INSERT INTO messages (message_id, message, user_id) VALUES ({message_id}, '{message}', {user_id})")
+    connect.commit()
+    cursor.close()
+    connect.close()
     return None
 
-def create_user():
+def create_user(user_id, username):
+    connect = create_connection()
+    cursor = connect.cursor()
+
+    cursor.execute(f"INSERT INTO users (user_id, username) VALUES ({user_id}, '{username}')")
+    connect.commit()
+    cursor.close()
+    connect.close()
     return None
 
 def get_all_messages():
@@ -41,7 +55,6 @@ def get_all_messages():
     cursor.close()
     connect.close()
 
-    print(message_list['message_list'])
     return message_list['message_list']
 
 
@@ -70,7 +83,6 @@ def get_all_users():
     cursor.close()
     connect.close()
 
-    print(user_list['user_list'])
     return user_list['user_list']
 
 
