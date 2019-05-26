@@ -13,8 +13,9 @@ export class DataService {
   //   return this.http.get('/messages', info)
   // }
 
-  message_list() {
-    return this.http.get('/messages');
+  message_list(messageText) {
+    const options = {params: new HttpParams().set('message', messageText)}
+    return this.http.get('/messages', options);
   }
 
   user_list() {

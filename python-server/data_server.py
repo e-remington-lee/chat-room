@@ -27,7 +27,14 @@ def create_message(user_id, message, message_id):
     connect.close()
     return None
 
-def create_user():
+def create_user(user_id, username):
+    connect = create_connection()
+    cursor = connect.cursor()
+
+    cursor.execute(f"INSERT INTO users (user_id, username) VALUES ({user_id}, '{username}')")
+    connect.commit()
+    cursor.close()
+    connect.close()
     return None
 
 def get_all_messages():

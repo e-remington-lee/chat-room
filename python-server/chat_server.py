@@ -2,7 +2,7 @@ from flask import Flask, jsonify, render_template, request
 import requests
 import json
 import sqlalchemy
-from data_server import get_all_messages, get_all_users, create_message
+from data_server import get_all_messages, get_all_users, create_message, create_user
 
 app = Flask(__name__)
 
