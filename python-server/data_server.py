@@ -2,8 +2,6 @@ import psycopg2
 import sqlalchemy
 import datetime
 
-
-
 #how was I supposed to know the host, I just guessed at localhost
 user_database = 'users'
 message_database = 'messages'
@@ -56,9 +54,6 @@ def get_all_messages():
     connect.close()
 
     return message_list['message_list']
-
-
-
 
 def find_specific_user():
     return None

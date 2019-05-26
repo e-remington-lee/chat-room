@@ -6,7 +6,6 @@ from data_server import get_all_messages, get_all_users, create_message, create_
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def root_server():
         return render_template('index.html')
@@ -33,7 +32,6 @@ def find_create_users():
                         for user in get_all_users():
                                 if str(user['user_id']) == q:
                                         return jsonify(user)
-
                         return jsonify({"Error": "User Not Found"}), 404
                 else:
                         return jsonify(get_all_users())
