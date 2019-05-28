@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../data.service';
   
 @Component({
@@ -6,13 +6,14 @@ import { DataService } from '../data.service';
   templateUrl: './chatroom.component.html',
   styleUrls: ['./chatroom.component.scss']
 })
-export class ChatroomComponent implements OnInit {
+export class ChatroomComponent implements OnInit, AfterViewInit {
 
   messageText: string;
   username: string;
   messageList: Object;
   userList: Object;
   newMessage: Object;
+  container: HTMLElement;
 
   constructor(private data: DataService) { }
 
@@ -25,7 +26,15 @@ export class ChatroomComponent implements OnInit {
     this.data.user_list().subscribe(data => {
       this.userList = data;
     });
+
+    var socket = io.connect('http://localhost:8000');
+    
   }
+
+  ngAfterViewInit() {         
+    this.container = document.getElementById("textBox");           
+    this.container.scrollTop = this.container.scrollHeight;     
+  }  
   
   onEnter(){
     const message = {
@@ -40,4 +49,15 @@ export class ChatroomComponent implements OnInit {
     }); 
     console.log(this.messageText)
 }
+  updateChat() {
+    this.data.message_list().subscribe(data => {
+      this.messageList = data;
+    }); 
+
+    this.data.user_list().subscribe(data => {
+      this.userList = data;
+    });
+
+    setTimeout(this.updateChat, 500);
+  }
 }

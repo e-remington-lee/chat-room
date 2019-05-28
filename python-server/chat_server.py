@@ -3,12 +3,20 @@ import requests
 import json
 import sqlalchemy
 from data_server import get_all_messages, get_all_users, create_message, create_user
+from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 @app.route('/')
 def root_server():
         return render_template('index.html')
+
+@socketio.on('message')
+def handle_requests(json, methods=['GET', 'POST']):
+        send(json, broadcast=True)
+        # socketio.emit('response', json, callback='It worked!')
+
 
 @app.route('/messages', methods=['GET', 'POST'])
 def get_post_messages():
@@ -45,4 +53,5 @@ def find_create_users():
                 return jsonify(get_all_users()), 201
 
 if __name__  == '__main__':
-    app.run(debug=True, port=8000)
+#     app.run(debug=True, port=8000)
+        socketio.run(app, debug=True, port=8000)
