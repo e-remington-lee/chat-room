@@ -264,7 +264,8 @@ var DataService = /** @class */ (function () {
     //   return this.http.post('/messages?', options)
     // }
     DataService.prototype.write_message = function (messageText) {
-        return this.http.post('/messages', messageText);
+        var options = { params: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('message', messageText) };
+        return this.http.post('/messages?', options);
     };
     DataService.prototype.message_list = function () {
         return this.http.get('/messages');
