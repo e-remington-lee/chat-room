@@ -8,7 +8,7 @@ import { DataService } from '../data.service';
 })
 export class ChatroomComponent implements OnInit {
 
-  inputText: string;
+  messageText: string;
   username: string;
   messageList: Object;
   userList: Object;
@@ -18,7 +18,7 @@ export class ChatroomComponent implements OnInit {
 
   ngOnInit() {
     //probably some message box asking you to login
-    this.data.message_list(this.inputText).subscribe(data => {
+    this.data.message_list(this.messageText).subscribe(data => {
       this.messageList = data;
     }); 
 
@@ -28,6 +28,6 @@ export class ChatroomComponent implements OnInit {
   }
   
   onEnter(){
-    console.log(this.inputText)
+    console.log(this.messageText)
 }
 }
