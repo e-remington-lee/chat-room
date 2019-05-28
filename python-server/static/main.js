@@ -216,7 +216,6 @@ var ChatroomComponent = /** @class */ (function () {
         this.data.user_list().subscribe(function (data) {
             _this.userList = data;
         });
-        var socket = io.connect('http://localhost:8000');
     };
     ChatroomComponent.prototype.ngAfterViewInit = function () {
         this.container = document.getElementById("textBox");

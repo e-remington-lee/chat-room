@@ -26,9 +26,6 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.data.user_list().subscribe(data => {
       this.userList = data;
     });
-
-    var socket = io.connect('http://localhost:8000');
-    
   }
 
   ngAfterViewInit() {         
