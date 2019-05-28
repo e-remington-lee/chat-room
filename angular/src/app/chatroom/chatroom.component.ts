@@ -28,8 +28,15 @@ export class ChatroomComponent implements OnInit {
   }
   
   onEnter(){
-    this.data.write_message(this.messageText).subscribe(data => {
-      this.messageList = data;
+    const message = {
+        user: {
+        user_id:4
+      },
+      message: this.messageText
+    }
+
+    this.data.write_message(message).subscribe(data => {
+      console.log('post request success!');
     }); 
     console.log(this.messageText)
 }

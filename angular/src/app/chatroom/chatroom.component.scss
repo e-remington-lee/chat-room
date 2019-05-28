@@ -15,10 +15,12 @@
 }
 #userBox {
     height: 450px;
+    overflow: auto
 }
 
 #textBox {
     height: 400px;
+    overflow: auto
 }
 #searchBox {
     margin: 10px 0 10px 0;

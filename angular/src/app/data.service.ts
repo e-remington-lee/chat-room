@@ -13,8 +13,7 @@ export class DataService {
   //   return this.http.post('/messages?', options)
   // }
   write_message(messageText) {
-    const options = {params: new HttpParams().set('message', messageText)};
-    return this.http.post('/messages?', options)
+    return this.http.post('/messages', messageText)
   }
 
   message_list() {

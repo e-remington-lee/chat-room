@@ -15,20 +15,12 @@ def get_post_messages():
         if request.method =='GET':
                 return jsonify(get_all_messages())
         elif request.method =='POST':
-                post_message = request.args.get('message')
-                if post_message:
-                        user_id='4'
+                        data = request.get_json()
+                        user_id = data['user']['user_id']
+                        message = data['message']
                         message_id = len(get_all_messages())+1
-                        create_message(user_id, post_message, message_id)
 
-                        return jsonify(get_all_messages()), 201
-                else: 
-                        # data = request.get_json()
-                        # user_id = data['user']['user_id']
-                        # message = data['message']
-                        # message_id = len(get_all_messages())+1
-
-                        # create_message(user_id, message, message_id)
+                        create_message(user_id, message, message_id)
                         
                         return jsonify(get_all_messages()), 201
 
