@@ -210,7 +210,7 @@ var ChatroomComponent = /** @class */ (function () {
     ChatroomComponent.prototype.ngOnInit = function () {
         var _this = this;
         //probably some message box asking you to login
-        this.data.message_list(this.messageText).subscribe(function (data) {
+        this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
         });
         this.data.user_list().subscribe(function (data) {
@@ -218,6 +218,10 @@ var ChatroomComponent = /** @class */ (function () {
         });
     };
     ChatroomComponent.prototype.onEnter = function () {
+        var _this = this;
+        this.data.write_message(this.messageText).subscribe(function (data) {
+            _this.messageList = data;
+        });
         console.log(this.messageText);
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -255,13 +259,15 @@ var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
-    // writeMessage(message) {
-    //   const info = { params: new HttpParams().set('q', message)}
-    //   return this.http.get('/messages', info)
+    // write_message(messageText) {
+    //   const options = {params: new HttpParams().set('message', messageText)};
+    //   return this.http.post('/messages?', options)
     // }
-    DataService.prototype.message_list = function (messageText) {
-        var options = { params: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('message', messageText) };
-        return this.http.get('/messages', options);
+    DataService.prototype.write_message = function (messageText) {
+        return this.http.post('/messages', messageText);
+    };
+    DataService.prototype.message_list = function () {
+        return this.http.get('/messages');
     };
     DataService.prototype.user_list = function () {
         return this.http.get('/users');

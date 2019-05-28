@@ -8,17 +8,20 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  // writeMessage(message) {
-  //   const info = { params: new HttpParams().set('q', message)}
-  //   return this.http.get('/messages', info)
+  // write_message(messageText) {
+  //   const options = {params: new HttpParams().set('message', messageText)};
+  //   return this.http.post('/messages?', options)
   // }
+  write_message(messageText) {
+    return this.http.post('/messages',messageText)
+  }
 
-  message_list(messageText) {
-    const options = {params: new HttpParams().set('message', messageText)}
-    return this.http.get('/messages', options);
+  message_list() {
+    return this.http.get('/messages');
   }
 
   user_list() {
+
     return this.http.get('/users');
   }
 }
