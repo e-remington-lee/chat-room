@@ -231,7 +231,7 @@ var ChatroomComponent = /** @class */ (function () {
         this.data.write_message(message).subscribe(function (data) {
             console.log('post request success!');
         });
-        console.log(this.messageText);
+        this.messageText = "";
     };
     ChatroomComponent.prototype.updateChat = function () {
         var _this = this;

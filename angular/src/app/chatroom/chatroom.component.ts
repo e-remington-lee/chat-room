@@ -44,7 +44,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.data.write_message(message).subscribe(data => {
       console.log('post request success!');
     }); 
-    console.log(this.messageText)
+    this.messageText =""
 }
   updateChat() {
     this.data.message_list().subscribe(data => {
