@@ -18,7 +18,7 @@ export class ChatroomComponent implements OnInit {
 
   ngOnInit() {
     //probably some message box asking you to login
-    this.data.message_list(this.messageText).subscribe(data => {
+    this.data.message_list().subscribe(data => {
       this.messageList = data;
     }); 
 
@@ -28,6 +28,16 @@ export class ChatroomComponent implements OnInit {
   }
   
   onEnter(){
+    const message = {
+        user: {
+        user_id:4
+      },
+      message: this.messageText
+    }
+
+    this.data.write_message(message).subscribe(data => {
+      console.log('post request success!');
+    }); 
     console.log(this.messageText)
 }
 }

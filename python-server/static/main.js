@@ -183,7 +183,7 @@ module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#activeUsers {\n  border-bottom: 1px solid black;\n  padding-bottom: 5px; }\n\n#userBox {\n  height: 450px; }\n\n#textBox {\n  height: 400px; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBVXpCO0VBQ0ksOEJBQThCO0VBQzlCLG1CQUFtQixFQUFBOztBQUV2QjtFQUNJLGFBQWEsRUFBQTs7QUFHakI7RUFDSSxhQUFhLEVBQUE7O0FBRWpCO0VBQ0kscUJBQXFCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jaGF0cm9vbS9jaGF0cm9vbS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiN0aXRsZSB7XG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xufVxuLy8gI3VzZXJCb3gge1xuLy8gICAgIGhlaWdodDogNzAwcHg7XG4vLyB9XG5cbi8vICN0ZXh0Qm94IHtcbi8vICAgICBoZWlnaHQ6IDY1MHB4O1xuLy8gfVxuXG4jYWN0aXZlVXNlcnMge1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBibGFjaztcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xufVxuI3VzZXJCb3gge1xuICAgIGhlaWdodDogNDUwcHg7XG59XG5cbiN0ZXh0Qm94IHtcbiAgICBoZWlnaHQ6IDQwMHB4O1xufVxuI3NlYXJjaEJveCB7XG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xufSJdfQ== */"
+module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#activeUsers {\n  border-bottom: 1px solid black;\n  padding-bottom: 5px; }\n\n#userBox {\n  height: 450px;\n  overflow: auto; }\n\n#textBox {\n  height: 400px;\n  overflow: auto; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBVXpCO0VBQ0ksOEJBQThCO0VBQzlCLG1CQUFtQixFQUFBOztBQUV2QjtFQUNJLGFBQWE7RUFDYixjQUNKLEVBQUE7O0FBRUE7RUFDSSxhQUFhO0VBQ2IsY0FDSixFQUFBOztBQUNBO0VBQ0kscUJBQXFCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jaGF0cm9vbS9jaGF0cm9vbS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiN0aXRsZSB7XG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xufVxuLy8gI3VzZXJCb3gge1xuLy8gICAgIGhlaWdodDogNzAwcHg7XG4vLyB9XG5cbi8vICN0ZXh0Qm94IHtcbi8vICAgICBoZWlnaHQ6IDY1MHB4O1xuLy8gfVxuXG4jYWN0aXZlVXNlcnMge1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBibGFjaztcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xufVxuI3VzZXJCb3gge1xuICAgIGhlaWdodDogNDUwcHg7XG4gICAgb3ZlcmZsb3c6IGF1dG9cbn1cblxuI3RleHRCb3gge1xuICAgIGhlaWdodDogNDAwcHg7XG4gICAgb3ZlcmZsb3c6IGF1dG9cbn1cbiNzZWFyY2hCb3gge1xuICAgIG1hcmdpbjogMTBweCAwIDEwcHggMDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -210,7 +210,7 @@ var ChatroomComponent = /** @class */ (function () {
     ChatroomComponent.prototype.ngOnInit = function () {
         var _this = this;
         //probably some message box asking you to login
-        this.data.message_list(this.messageText).subscribe(function (data) {
+        this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
         });
         this.data.user_list().subscribe(function (data) {
@@ -218,6 +218,15 @@ var ChatroomComponent = /** @class */ (function () {
         });
     };
     ChatroomComponent.prototype.onEnter = function () {
+        var message = {
+            user: {
+                user_id: 4
+            },
+            message: this.messageText
+        };
+        this.data.write_message(message).subscribe(function (data) {
+            console.log('post request success!');
+        });
         console.log(this.messageText);
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -255,13 +264,15 @@ var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
-    // writeMessage(message) {
-    //   const info = { params: new HttpParams().set('q', message)}
-    //   return this.http.get('/messages', info)
+    // write_message(messageText) {
+    //   const options = {params: new HttpParams().set('message', messageText)};
+    //   return this.http.post('/messages?', options)
     // }
-    DataService.prototype.message_list = function (messageText) {
-        var options = { params: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('message', messageText) };
-        return this.http.get('/messages', options);
+    DataService.prototype.write_message = function (messageText) {
+        return this.http.post('/messages', messageText);
+    };
+    DataService.prototype.message_list = function () {
+        return this.http.get('/messages');
     };
     DataService.prototype.user_list = function () {
         return this.http.get('/users');

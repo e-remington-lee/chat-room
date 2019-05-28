@@ -15,14 +15,14 @@ def get_post_messages():
         if request.method =='GET':
                 return jsonify(get_all_messages())
         elif request.method =='POST':
-                data = request.get_json()
-                user_id = data['user']['user_id']
-                message = data['message']
-                message_id = len(get_all_messages())+1
+                        data = request.get_json()
+                        user_id = data['user']['user_id']
+                        message = data['message']
+                        message_id = len(get_all_messages())+1
 
-                create_message(user_id, message, message_id)
-                
-                return jsonify(get_all_messages()), 201
+                        create_message(user_id, message, message_id)
+                        
+                        return jsonify(get_all_messages()), 201
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
