@@ -278,10 +278,6 @@ var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
-    // write_message(messageText) {
-    //   const options = {params: new HttpParams().set('message', messageText)};
-    //   return this.http.post('/messages?', options)
-    // }
     DataService.prototype.write_message = function (messageText) {
         return this.http.post('/messages', messageText);
     };

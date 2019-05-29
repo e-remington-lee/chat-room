@@ -14,8 +14,9 @@ def root_server():
 
 @socketio.on('message')
 def handle_requests(json, methods=['GET', 'POST']):
-        send(json, broadcast=True)
-        # socketio.emit('response', json, callback='It worked!')
+        print(f'recieved {json}')
+        # send(json, broadcast=True)
+        socketio.emit('response', json, callback='It worked!')
 
 
 @app.route('/messages', methods=['GET', 'POST'])
