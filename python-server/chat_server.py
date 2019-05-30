@@ -15,8 +15,8 @@ def root_server():
 @socketio.on('message')
 def handle_requests(json, methods=['GET', 'POST']):
         print(f'recieved {json}')
-        # send(json, broadcast=True)
-        socketio.emit('response', json, callback='It worked!')
+        send(json, broadcast=True)
+        # socketio.emit('response', json, callback='It worked!')
 
 
 @app.route('/messages', methods=['GET', 'POST'])
@@ -54,5 +54,4 @@ def find_create_users():
                 return jsonify(get_all_users()), 201
 
 if __name__  == '__main__':
-#     app.run(debug=True, port=8000)
         socketio.run(app, debug=True, port=8000)
