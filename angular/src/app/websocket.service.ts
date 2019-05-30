@@ -1,19 +1,29 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
-
   
-  constructor() { }
+  private url = 'http://localhost:8000';
+  private socket;
+  
+  constructor() {
+    this.socket = io(this.url);
+   }
 
-  socketStart() {
-    const socket = io('http://localhost:8000')
+  // createObservableSocket() {
+  //   const socket = 'ws://localhost:8000';
+  //   this.ws = new WebSocket(socket);
 
-    socket.on('data', (res)=> {
-      console.log(`new connection to: ${res.id})`);
-    });
+  //   return new Observable(
+  //     observer => { this.ws.new_message = (event) => observer.next(event.data)}
+  //   )
+  // }
+
+  socketStart(message) {
+    this.socket.emit('new message', message);
   }
 }

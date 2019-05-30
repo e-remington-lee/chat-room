@@ -26,9 +26,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
     this.data.user_list().subscribe(data => {
       this.userList = data;
-    });
-
-
+    });    
   }
 
   ngAfterViewInit() {         
@@ -46,7 +44,8 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
     this.data.write_message(message).subscribe(data => {
       console.log('post request success!');
-    }); 
-    this.messageText =""
+    });
+    this.web.socketStart(this.messageText);
+    this.messageText ="";
   }
 }

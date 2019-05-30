@@ -234,6 +234,7 @@ var ChatroomComponent = /** @class */ (function () {
         this.data.write_message(message).subscribe(function (data) {
             console.log('post request success!');
         });
+        this.web.socketStart(this.messageText);
         this.messageText = "";
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -312,12 +313,18 @@ __webpack_require__.r(__webpack_exports__);
 
 var WebsocketService = /** @class */ (function () {
     function WebsocketService() {
+        this.url = 'http://localhost:8000';
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
-    WebsocketService.prototype.socketStart = function () {
-        var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__('http://localhost:8000');
-        socket.on('data', function (res) {
-            console.log("new connection to: " + res.id + ")");
-        });
+    // createObservableSocket() {
+    //   const socket = 'ws://localhost:8000';
+    //   this.ws = new WebSocket(socket);
+    //   return new Observable(
+    //     observer => { this.ws.new_message = (event) => observer.next(event.data)}
+    //   )
+    // }
+    WebsocketService.prototype.socketStart = function (message) {
+        this.socket.emit('new message', message);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

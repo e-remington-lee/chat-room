@@ -17,7 +17,6 @@ export class DataService {
   }
 
   user_list() {
-
     return this.http.get('/users');
   }
 }

@@ -3,7 +3,7 @@ import requests
 import json
 import sqlalchemy
 from data_server import get_all_messages, get_all_users, create_message, create_user
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send, emit
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -12,11 +12,17 @@ socketio = SocketIO(app)
 def root_server():
         return render_template('index.html')
 
-@socketio.on('message')
-def handle_requests(json, methods=['GET', 'POST']):
-        print(f'recieved {json}')
-        send(json, broadcast=True)
+@socketio.on('new message')
+def new_message(message):
+        return print(f'recieved {message}')
+        # send(json, broadcast=True)
         # socketio.emit('response', json, callback='It worked!')
+
+@socketio.on('user')
+def new_user(json, methods=['GET', 'POST']):
+        # print(f'recieved {json}')
+        # send(json, broadcast=True)
+        socketio.emit('response', {'data': 'It worked!'})
 
 
 @app.route('/messages', methods=['GET', 'POST'])
@@ -55,3 +61,4 @@ def find_create_users():
 
 if __name__  == '__main__':
         socketio.run(app, debug=True, port=8000)
+        # app.run(debug=True, port=8000)
