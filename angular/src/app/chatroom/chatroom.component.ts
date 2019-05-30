@@ -27,6 +27,8 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.data.user_list().subscribe(data => {
       this.userList = data;
     });
+
+
   }
 
   ngAfterViewInit() {         

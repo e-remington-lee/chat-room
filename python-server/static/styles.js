@@ -550,7 +550,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!*******************************!*\
   !*** multi ./src/styles.scss ***!
   \*******************************/
@@ -562,5 +562,5 @@ module.exports = __webpack_require__(/*! D:\Mastermind\Chat-room\angular\src\sty
 
 /***/ })
 
-},[[3,"runtime"]]]);
+},[[4,"runtime"]]]);
 //# sourceMappingURL=styles.js.map
