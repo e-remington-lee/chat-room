@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
+import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { map, catchError } from 'rxjs/operators';
-import * as socketIo from 'socket.io-client';
-
-import { Socket } from '../shared/interfaces';
+import * as Rx from 'rxjs/Rx';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
