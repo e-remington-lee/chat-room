@@ -13,10 +13,9 @@ def root_server():
         return render_template('index.html')
 
 @socketio.on('message')
-def new_message(bob, methods=['GET', 'POST']):
-        print(f'recieved {bob}')
-        socketio.send(bob, broadcast=True)
-        # socketio.emit('response', json, callback='It worked!')
+def new_message(message, methods=['GET', 'POST']):
+        print(f'recieved {message}')
+        socketio.emit('message', message, broadcast=True)
 
 # @socketio.on('user')
 # def new_user(json, methods=['GET', 'POST']):
