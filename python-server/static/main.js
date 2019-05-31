@@ -213,7 +213,6 @@ var ChatroomComponent = /** @class */ (function () {
     ChatroomComponent.prototype.ngOnInit = function () {
         //probably some message box asking you to login
         var _this = this;
-        this.web.socketStart();
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
         });
@@ -317,14 +316,14 @@ var WebsocketService = /** @class */ (function () {
         this.url = 'http://localhost:8000';
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
-    WebsocketService.prototype.socketStart = function () {
-        var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__('http://localhost:8000');
-        socket.on('message', function (res) {
-            console.log('New connection:', res);
-        });
-    };
+    // socketStart() {
+    //   this.socket.on('message', (res) => {
+    //     console.log('New connection:', res);
+    //   });
+    // }
     WebsocketService.prototype.sendMessage = function (message) {
         this.socket.emit('message', message);
+        // console.log('new: ', message);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
