@@ -211,8 +211,9 @@ var ChatroomComponent = /** @class */ (function () {
         this.web = web;
     }
     ChatroomComponent.prototype.ngOnInit = function () {
-        var _this = this;
         //probably some message box asking you to login
+        var _this = this;
+        this.web.socketStart();
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
         });
@@ -231,10 +232,10 @@ var ChatroomComponent = /** @class */ (function () {
             },
             message: this.messageText
         };
-        this.data.write_message(message).subscribe(function (data) {
-            console.log('post request success!');
-        });
-        this.web.socketStart(this.messageText);
+        // this.data.write_message(message).subscribe(data => {
+        //   console.log('post request success!');
+        // });
+        this.web.sendMessage(message);
         this.messageText = "";
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -316,15 +317,14 @@ var WebsocketService = /** @class */ (function () {
         this.url = 'http://localhost:8000';
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
-    // createObservableSocket() {
-    //   const socket = 'ws://localhost:8000';
-    //   this.ws = new WebSocket(socket);
-    //   return new Observable(
-    //     observer => { this.ws.new_message = (event) => observer.next(event.data)}
-    //   )
-    // }
-    WebsocketService.prototype.socketStart = function (message) {
-        this.socket.emit('new message', message);
+    WebsocketService.prototype.socketStart = function () {
+        var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__('http://localhost:8000');
+        socket.on('message', function (res) {
+            console.log('New connection:', res);
+        });
+    };
+    WebsocketService.prototype.sendMessage = function (message) {
+        this.socket.emit('message', message);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

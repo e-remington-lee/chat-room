@@ -12,17 +12,15 @@ socketio = SocketIO(app)
 def root_server():
         return render_template('index.html')
 
-@socketio.on('new message')
-def new_message(message):
-        return print(f'recieved {message}')
-        # send(json, broadcast=True)
+@socketio.on('message')
+def new_message(bob, methods=['GET', 'POST']):
+        print(f'recieved {bob}')
+        socketio.send(bob, broadcast=True)
         # socketio.emit('response', json, callback='It worked!')
 
-@socketio.on('user')
-def new_user(json, methods=['GET', 'POST']):
-        # print(f'recieved {json}')
-        # send(json, broadcast=True)
-        socketio.emit('response', {'data': 'It worked!'})
+# @socketio.on('user')
+# def new_user(json, methods=['GET', 'POST']):
+#         socketio.emit('response', {'data': 'It worked!'})
 
 
 @app.route('/messages', methods=['GET', 'POST'])

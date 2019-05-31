@@ -20,6 +20,9 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     //probably some message box asking you to login
+
+    this.web.socketStart();
+
     this.data.message_list().subscribe(data => {
       this.messageList = data;
     }); 
@@ -42,10 +45,10 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
       message: this.messageText
     }
 
-    this.data.write_message(message).subscribe(data => {
-      console.log('post request success!');
-    });
-    this.web.socketStart(this.messageText);
+    // this.data.write_message(message).subscribe(data => {
+    //   console.log('post request success!');
+    // });
+    this.web.sendMessage(message);
     this.messageText ="";
   }
 }
