@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { WebsocketService } from '../websocket.service';
   
 @Component({
   selector: 'app-chatroom',
@@ -15,17 +16,20 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   newMessage: Object;
   container: HTMLElement;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private web: WebsocketService) { }
 
   ngOnInit() {
     //probably some message box asking you to login
+
+    this.web.socketStart();
+
     this.data.message_list().subscribe(data => {
       this.messageList = data;
     }); 
 
     this.data.user_list().subscribe(data => {
       this.userList = data;
-    });
+    });    
   }
 
   ngAfterViewInit() {         
@@ -41,20 +45,10 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
       message: this.messageText
     }
 
-    this.data.write_message(message).subscribe(data => {
-      console.log('post request success!');
-    }); 
-    console.log(this.messageText)
-}
-  updateChat() {
-    this.data.message_list().subscribe(data => {
-      this.messageList = data;
-    }); 
-
-    this.data.user_list().subscribe(data => {
-      this.userList = data;
-    });
-
-    setTimeout(this.updateChat, 500);
+    // this.data.write_message(message).subscribe(data => {
+    //   console.log('post request success!');
+    // });
+    this.web.sendMessage(message);
+    this.messageText ="";
   }
 }

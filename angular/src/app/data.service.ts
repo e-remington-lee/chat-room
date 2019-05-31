@@ -8,10 +8,6 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  // write_message(messageText) {
-  //   const options = {params: new HttpParams().set('message', messageText)};
-  //   return this.http.post('/messages?', options)
-  // }
   write_message(messageText) {
     return this.http.post('/messages', messageText)
   }
@@ -21,7 +17,6 @@ export class DataService {
   }
 
   user_list() {
-
     return this.http.get('/users');
   }
 }

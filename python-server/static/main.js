@@ -200,16 +200,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data.service */ "./src/app/data.service.ts");
+/* harmony import */ var _websocket_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../websocket.service */ "./src/app/websocket.service.ts");
+
 
 
 
 var ChatroomComponent = /** @class */ (function () {
-    function ChatroomComponent(data) {
+    function ChatroomComponent(data, web) {
         this.data = data;
+        this.web = web;
     }
     ChatroomComponent.prototype.ngOnInit = function () {
-        var _this = this;
         //probably some message box asking you to login
+        var _this = this;
+        this.web.socketStart();
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
         });
@@ -228,20 +232,11 @@ var ChatroomComponent = /** @class */ (function () {
             },
             message: this.messageText
         };
-        this.data.write_message(message).subscribe(function (data) {
-            console.log('post request success!');
-        });
-        console.log(this.messageText);
-    };
-    ChatroomComponent.prototype.updateChat = function () {
-        var _this = this;
-        this.data.message_list().subscribe(function (data) {
-            _this.messageList = data;
-        });
-        this.data.user_list().subscribe(function (data) {
-            _this.userList = data;
-        });
-        setTimeout(this.updateChat, 500);
+        // this.data.write_message(message).subscribe(data => {
+        //   console.log('post request success!');
+        // });
+        this.web.sendMessage(message);
+        this.messageText = "";
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -249,7 +244,7 @@ var ChatroomComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./chatroom.component.html */ "./src/app/chatroom/chatroom.component.html"),
             styles: [__webpack_require__(/*! ./chatroom.component.scss */ "./src/app/chatroom/chatroom.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _websocket_service__WEBPACK_IMPORTED_MODULE_3__["WebsocketService"]])
     ], ChatroomComponent);
     return ChatroomComponent;
 }());
@@ -278,10 +273,6 @@ var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
-    // write_message(messageText) {
-    //   const options = {params: new HttpParams().set('message', messageText)};
-    //   return this.http.post('/messages?', options)
-    // }
     DataService.prototype.write_message = function (messageText) {
         return this.http.post('/messages', messageText);
     };
@@ -298,6 +289,50 @@ var DataService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], DataService);
     return DataService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/websocket.service.ts":
+/*!**************************************!*\
+  !*** ./src/app/websocket.service.ts ***!
+  \**************************************/
+/*! exports provided: WebsocketService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebsocketService", function() { return WebsocketService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var WebsocketService = /** @class */ (function () {
+    function WebsocketService() {
+        this.url = 'http://localhost:8000';
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
+    }
+    WebsocketService.prototype.socketStart = function () {
+        var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__('http://localhost:8000');
+        socket.on('message', function (res) {
+            console.log('New connection:', res);
+        });
+    };
+    WebsocketService.prototype.sendMessage = function (message) {
+        this.socket.emit('message', message);
+    };
+    WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], WebsocketService);
+    return WebsocketService;
 }());
 
 
@@ -367,6 +402,17 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 
 module.exports = __webpack_require__(/*! D:\Mastermind\Chat-room\angular\src\main.ts */"./src/main.ts");
 
+
+/***/ }),
+
+/***/ 1:
+/*!********************!*\
+  !*** ws (ignored) ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 
