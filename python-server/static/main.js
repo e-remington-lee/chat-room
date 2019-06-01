@@ -210,19 +210,6 @@ var ChatroomComponent = /** @class */ (function () {
         this.data = data;
         this.web = web;
     }
-    ChatroomComponent.prototype.ngOnInit = function () {
-        //probably some message box asking you to login
-        var _this = this;
-        this.data.socket_messages().subscribe(function (messageList) {
-            _this.messageList = messageList;
-        });
-        this.data.message_list().subscribe(function (data) {
-            _this.messageList = data;
-        });
-        this.data.user_list().subscribe(function (data) {
-            _this.userList = data;
-        });
-    };
     ChatroomComponent.prototype.ngAfterViewInit = function () {
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
@@ -234,11 +221,24 @@ var ChatroomComponent = /** @class */ (function () {
             },
             message: this.messageText
         };
-        this.data.write_message(message).subscribe(function (data) {
-            console.log('post request success!');
-        });
-        this.data.send_message(this.messageList);
+        // this.data.write_message(message).subscribe(data => {
+        //   console.log('post request success!');
+        // });
+        this.data.send_message(message);
         this.messageText = "";
+    };
+    ChatroomComponent.prototype.ngOnInit = function () {
+        //probably some message box asking you to login
+        var _this = this;
+        this.data.socket_messages().subscribe(function (message) {
+            _this.messageList;
+        });
+        this.data.message_list().subscribe(function (data) {
+            _this.messageList = data;
+        });
+        this.data.user_list().subscribe(function (data) {
+            _this.userList = data;
+        });
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -281,13 +281,6 @@ var DataService = /** @class */ (function () {
         var _this = this;
         this.http = http;
         this.url = 'http://localhost:8000';
-        // socket_messages = () => {
-        //   return Observable.create((observer)=> {
-        //     this.socket.on('message', (message) => {
-        //       observer.next(message);
-        //     });
-        //   });
-        // }
         this.socket_messages = function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"].create(function (observer) {
                 _this.socket.on('message', function (message) {
@@ -302,13 +295,16 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.send_message = function (message) {
         this.socket.emit('message', message);
+        console.log(message);
     };
     DataService.prototype.message_list = function () {
         return this.http.get('/messages');
     };
+    ;
     DataService.prototype.user_list = function () {
         return this.http.get('/users');
     };
+    ;
     DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'

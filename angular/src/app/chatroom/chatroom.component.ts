@@ -18,22 +18,6 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
   constructor(private data: DataService, private web: WebsocketService) { }
 
-  ngOnInit() {
-    //probably some message box asking you to login
-
-    this.data.socket_messages().subscribe(messageList => {
-      this.messageList = messageList;
-    })
-
-    this.data.message_list().subscribe(data => {
-      this.messageList = data;
-    }); 
-
-    this.data.user_list().subscribe(data => {
-      this.userList = data;
-    });    
-  }
-
   ngAfterViewInit() {         
     this.container = document.getElementById("textBox");           
     this.container.scrollTop = this.container.scrollHeight;     
@@ -47,10 +31,28 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
       message: this.messageText
     }
 
-    this.data.write_message(message).subscribe(data => {
-      console.log('post request success!');
-    });
-    this.data.send_message(this.messageList)
+    // this.data.write_message(message).subscribe(data => {
+    //   console.log('post request success!');
+    // });
+    this.data.send_message(message)
     this.messageText ="";
   }
+
+  ngOnInit() {
+    //probably some message box asking you to login
+
+    this.data.socket_messages().subscribe(message => {
+      this.messageList;
+    })
+
+    this.data.message_list().subscribe(data => {
+      this.messageList = data;
+    }); 
+
+    this.data.user_list().subscribe(data => {
+      this.userList = data;
+    });    
+  }
+
+
 }

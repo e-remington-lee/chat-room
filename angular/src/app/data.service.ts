@@ -16,20 +16,21 @@ export class DataService {
   }
 
   write_message(message) {
-    return this.http.post('/messages', message)
+    return this.http.post('/messages', message);
   }
 
   send_message(message) {
     this.socket.emit('message', message);
+    console.log(message);
   }
+  
+  message_list() {
+    return this.http.get('/messages');
+  };
 
-  // socket_messages = () => {
-  //   return Observable.create((observer)=> {
-  //     this.socket.on('message', (message) => {
-  //       observer.next(message);
-  //     });
-  //   });
-  // }
+  user_list() {
+    return this.http.get('/users');
+  };
 
   socket_messages = () => {
     return Observable.create((observer)=> {
@@ -39,11 +40,5 @@ export class DataService {
     });
   }
 
-  message_list() {
-    return this.http.get('/messages');
-  }
 
-  user_list() {
-    return this.http.get('/users');
-  }
 }
