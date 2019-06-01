@@ -213,8 +213,8 @@ var ChatroomComponent = /** @class */ (function () {
     ChatroomComponent.prototype.ngOnInit = function () {
         //probably some message box asking you to login
         var _this = this;
-        this.data.socket_messages().subscribe(function (message) {
-            _this.messageList = message;
+        this.data.socket_messages().subscribe(function (messageList) {
+            _this.messageList = messageList;
         });
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;

@@ -21,8 +21,8 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     //probably some message box asking you to login
 
-    this.data.socket_messages().subscribe(message => {
-      this.messageList = message;
+    this.data.socket_messages().subscribe(messageList => {
+      this.messageList = messageList;
     })
 
     this.data.message_list().subscribe(data => {
