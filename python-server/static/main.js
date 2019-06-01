@@ -318,13 +318,13 @@ var WebsocketService = /** @class */ (function () {
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
     WebsocketService.prototype.socketStart = function () {
-        var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__('http://localhost:8000');
-        socket.on('message', function (res) {
+        this.socket.on('message', function (res) {
             console.log('New connection:', res);
         });
     };
     WebsocketService.prototype.sendMessage = function (message) {
         this.socket.emit('message', message);
+        // console.log('new: ', message);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

@@ -12,11 +12,7 @@ socketio = SocketIO(app)
 def root_server():
         return render_template('index.html')
 
-@socketio.on('message')
-def new_message(bob, methods=['GET', 'POST']):
-        print(f'recieved {bob}')
-        socketio.send(bob, broadcast=True)
-        # socketio.emit('response', json, callback='It worked!')
+
 
 # @socketio.on('user')
 # def new_user(json, methods=['GET', 'POST']):
@@ -36,6 +32,11 @@ def get_post_messages():
                         create_message(user_id, message, message_id)
                         
                         return jsonify(get_all_messages()), 201
+
+@socketio.on('message')
+def new_message(message, methods=['GET', 'POST']):
+        print(f'recieved {message}')
+        socketio.emit('message', get_all_messages(), broadcast=True)
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():

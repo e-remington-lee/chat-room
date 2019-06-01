@@ -14,15 +14,15 @@ export class WebsocketService {
   constructor() {
     this.socket = io(this.url);
    }
-  socketStart() {
-    const socket =io('http://localhost:8000');
 
-    socket.on('message', (res) => {
+  socketStart() {
+    this.socket.on('message', (res) => {
       console.log('New connection:', res);
     });
   }
 
   sendMessage(message){
     this.socket.emit('message', message);
+    // console.log('new: ', message);
   }
 }
