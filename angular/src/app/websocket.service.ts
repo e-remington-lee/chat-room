@@ -15,14 +15,13 @@ export class WebsocketService {
     this.socket = io(this.url);
    }
 
-  socketStart() {
-    this.socket.on('message', (res) => {
-      console.log('New connection:', res);
-    });
-  }
+  // socketStart() {
+  //   this.socket.on('message', (res) => {
+  //     return res;
+  //   });
+  // }
 
   sendMessage(message){
     this.socket.emit('message', message);
-    // console.log('new: ', message);
   }
 }

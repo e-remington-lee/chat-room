@@ -18,7 +18,7 @@ def create_message(user_id, message, message_id):
     connect = create_connection()
     cursor = connect.cursor()
 
-    cursor.execute(f"INSERT INTO messages (message_id, message, user_id) VALUES ({message_id}, '{message}', {user_id})")
+    cursor.execute(f'''INSERT INTO messages (message_id, message, user_id) VALUES ({message_id}, '{message}', {user_id})''')
     connect.commit()
     cursor.close()
     connect.close()

@@ -1,15 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import * as io from 'socket.io-client';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http: HttpClient) { }
+  private url = 'http://localhost:8000';
+  private socket: SocketIOClient.Socket;
 
-  write_message(messageText) {
-    return this.http.post('/messages', messageText)
+  constructor(private http: HttpClient) { 
+    this.socket = io(this.url);
+  }
+
+  write_message(message) {
+    return this.http.post('/messages', message)
+  }
+
+  send_message(message) {
+    this.socket.emit('message', message);
+  }
+
+  // socket_messages = () => {
+  //   return Observable.create((observer)=> {
+  //     this.socket.on('message', (message) => {
+  //       observer.next(message);
+  //     });
+  //   });
+  // }
+
+  socket_messages = () => {
+    return Observable.create((observer)=> {
+      this.socket.on('message', (message) => {
+        observer.next(message);
+      });
+    });
   }
 
   message_list() {

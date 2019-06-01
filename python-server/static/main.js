@@ -213,7 +213,9 @@ var ChatroomComponent = /** @class */ (function () {
     ChatroomComponent.prototype.ngOnInit = function () {
         //probably some message box asking you to login
         var _this = this;
-        this.web.socketStart();
+        this.data.socket_messages().subscribe(function (message) {
+            _this.messageList = message;
+        });
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
         });
@@ -232,10 +234,10 @@ var ChatroomComponent = /** @class */ (function () {
             },
             message: this.messageText
         };
-        // this.data.write_message(message).subscribe(data => {
-        //   console.log('post request success!');
-        // });
-        this.web.sendMessage(message);
+        this.data.write_message(message).subscribe(function (data) {
+            console.log('post request success!');
+        });
+        this.data.send_message(this.messageList);
         this.messageText = "";
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -266,15 +268,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
 
 
 
 var DataService = /** @class */ (function () {
     function DataService(http) {
+        var _this = this;
         this.http = http;
+        this.url = 'http://localhost:8000';
+        // socket_messages = () => {
+        //   return Observable.create((observer)=> {
+        //     this.socket.on('message', (message) => {
+        //       observer.next(message);
+        //     });
+        //   });
+        // }
+        this.socket_messages = function () {
+            return rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"].create(function (observer) {
+                _this.socket.on('message', function (message) {
+                    observer.next(message);
+                });
+            });
+        };
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_3__(this.url);
     }
-    DataService.prototype.write_message = function (messageText) {
-        return this.http.post('/messages', messageText);
+    DataService.prototype.write_message = function (message) {
+        return this.http.post('/messages', message);
+    };
+    DataService.prototype.send_message = function (message) {
+        this.socket.emit('message', message);
     };
     DataService.prototype.message_list = function () {
         return this.http.get('/messages');
@@ -317,14 +344,13 @@ var WebsocketService = /** @class */ (function () {
         this.url = 'http://localhost:8000';
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
-    WebsocketService.prototype.socketStart = function () {
-        this.socket.on('message', function (res) {
-            console.log('New connection:', res);
-        });
-    };
+    // socketStart() {
+    //   this.socket.on('message', (res) => {
+    //     return res;
+    //   });
+    // }
     WebsocketService.prototype.sendMessage = function (message) {
         this.socket.emit('message', message);
-        // console.log('new: ', message);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
