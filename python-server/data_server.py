@@ -14,11 +14,11 @@ def create_connection():
         password = "Bob!3489")
 
 
-def create_message(user_id, message, message_id):
+def create_message(user_id, message):
     connect = create_connection()
     cursor = connect.cursor()
 
-    cursor.execute(f'''INSERT INTO messages (message_id, message, user_id) VALUES ({message_id}, '{message}', {user_id})''')
+    cursor.execute(f'''INSERT INTO messages (message, user_id) VALUES ('{message}', {user_id})''')
     connect.commit()
     cursor.close()
     connect.close()

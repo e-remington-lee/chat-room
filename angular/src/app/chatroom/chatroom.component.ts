@@ -26,14 +26,14 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   onEnter(){
     const message = {
         user: {
-        user_id:4
+        user_id: 4
       },
       message: this.messageText
     }
 
-    // this.data.write_message(message).subscribe(data => {
-    //   console.log('post request success!');
-    // });
+    this.data.write_message(message).subscribe(data => {
+      console.log('post request success!');
+    });
     this.data.send_message(message)
     this.messageText ="";
   }
