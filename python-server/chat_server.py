@@ -48,9 +48,8 @@ def find_create_users():
         elif request.method =='POST':
                 data = request.get_json()
                 username = data['username']
-                user_id = len(get_all_users())+1
 
-                create_user(user_id, username)
+                create_user(username)
 
                 return jsonify(get_all_users()), 201
 

@@ -24,11 +24,11 @@ def create_message(user_id, message):
     connect.close()
     return None
 
-def create_user(user_id, username):
+def create_user( username):
     connect = create_connection()
     cursor = connect.cursor()
 
-    cursor.execute(f"INSERT INTO users (user_id, username) VALUES ({user_id}, '{username}')")
+    cursor.execute(f"INSERT INTO users (username) VALUES ('{username}')")
     connect.commit()
     cursor.close()
     connect.close()
