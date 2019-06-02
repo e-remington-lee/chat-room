@@ -231,7 +231,7 @@ var ChatroomComponent = /** @class */ (function () {
         //probably some message box asking you to login
         var _this = this;
         this.data.socket_messages().subscribe(function (message) {
-            _this.messageList;
+            console.log(message);
         });
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;

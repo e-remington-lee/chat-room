@@ -42,7 +42,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     //probably some message box asking you to login
 
     this.data.socket_messages().subscribe(message => {
-      this.messageList;
+      console.log(message);
     })
 
     this.data.message_list().subscribe(data => {
