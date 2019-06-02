@@ -12,12 +12,9 @@ socketio = SocketIO(app)
 def root_server():
         return render_template('index.html')
 
-
-
 # @socketio.on('user')
 # def new_user(json, methods=['GET', 'POST']):
 #         socketio.emit('response', {'data': 'It worked!'})
-
 
 @app.route('/messages', methods=['GET', 'POST'])
 def get_post_messages():
@@ -27,16 +24,16 @@ def get_post_messages():
                         data = request.get_json()
                         user_id = data['user']['user_id']
                         message = data['message']
-                        message_id = len(get_all_messages())+1
 
-                        create_message(user_id, message, message_id)
+                        create_message(user_id, message)
                         
                         return jsonify(get_all_messages()), 201
 
 @socketio.on('message')
 def new_message(message, methods=['GET', 'POST']):
         print(f'recieved {message}')
-        socketio.emit('message', get_all_messages(), broadcast=True)
+
+        socketio.emit('message', message, broadcast=True)
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
@@ -52,9 +49,8 @@ def find_create_users():
         elif request.method =='POST':
                 data = request.get_json()
                 username = data['username']
-                user_id = len(get_all_users())+1
 
-                create_user(user_id, username)
+                create_user(username)
 
                 return jsonify(get_all_users()), 201
 

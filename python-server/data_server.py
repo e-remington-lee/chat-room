@@ -14,21 +14,21 @@ def create_connection():
         password = "Bob!3489")
 
 
-def create_message(user_id, message, message_id):
+def create_message(user_id, message):
     connect = create_connection()
     cursor = connect.cursor()
 
-    cursor.execute(f"INSERT INTO messages (message_id, message, user_id) VALUES ({message_id}, '{message}', {user_id})")
+    cursor.execute(f'''INSERT INTO messages (message, user_id) VALUES ('{message}', {user_id})''')
     connect.commit()
     cursor.close()
     connect.close()
     return None
 
-def create_user(user_id, username):
+def create_user( username):
     connect = create_connection()
     cursor = connect.cursor()
 
-    cursor.execute(f"INSERT INTO users (user_id, username) VALUES ({user_id}, '{username}')")
+    cursor.execute(f"INSERT INTO users (username) VALUES ('{username}')")
     connect.commit()
     cursor.close()
     connect.close()
@@ -38,7 +38,7 @@ def get_all_messages():
     connect = create_connection()
     cursor = connect.cursor()
 
-    select_all = f'select * from messages inner join users on messages.user_id = users.user_id'
+    select_all = f'select * from messages inner join users on messages.user_id = users.user_id order by messages.message_id asc'
 
     cursor.execute(select_all)
     rows = cursor.fetchall()
