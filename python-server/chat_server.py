@@ -32,6 +32,7 @@ def get_post_messages():
 @socketio.on('message')
 def new_message(message, methods=['GET', 'POST']):
         print(f'recieved {message}')
+
         socketio.emit('message', message, broadcast=True)
 
 @app.route('/users', methods=['GET','POST'])

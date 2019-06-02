@@ -11,9 +11,8 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
   messageText: string;
   username: string;
-  messageList: Object;
-  userList: Object;
-  newMessage: Object;
+  messageList: any[]=[];
+  userList: any[]=[];
   container: HTMLElement;
 
   constructor(private data: DataService, private web: WebsocketService) { }
@@ -24,11 +23,16 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   }  
   
   onEnter(){
+    var today = new Date();
+    var message_time = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()
+     + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
     const message = {
         user: {
-        user_id: 4
+          username: 'Apple',
+          user_id: 4
       },
-      message: this.messageText
+      message: this.messageText,
+      message_time: message_time
     }
 
     this.data.write_message(message).subscribe(data => {
@@ -39,19 +43,22 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    //probably some message box asking you to login
+    this.username = localStorage.getItem('username');
+
 
     this.data.socket_messages().subscribe(message => {
-      console.log(message);
+      this.messageList.push(message)
     })
 
-    this.data.message_list().subscribe(data => {
+    this.data.message_list().subscribe((data: any[]) => {
       this.messageList = data;
     }); 
 
-    this.data.user_list().subscribe(data => {
+    this.data.user_list().subscribe((data: any[]) => {
       this.userList = data;
     });    
+    this.container = document.getElementById("textBox");           
+    this.container.scrollTop = this.container.scrollHeight; 
   }
 
 

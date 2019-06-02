@@ -209,17 +209,24 @@ var ChatroomComponent = /** @class */ (function () {
     function ChatroomComponent(data, web) {
         this.data = data;
         this.web = web;
+        this.messageList = [];
+        this.userList = [];
     }
     ChatroomComponent.prototype.ngAfterViewInit = function () {
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
     };
     ChatroomComponent.prototype.onEnter = function () {
+        var today = new Date();
+        var message_time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+            + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds();
         var message = {
             user: {
+                username: 'Apple',
                 user_id: 4
             },
-            message: this.messageText
+            message: this.messageText,
+            message_time: message_time
         };
         this.data.write_message(message).subscribe(function (data) {
             console.log('post request success!');
@@ -228,10 +235,10 @@ var ChatroomComponent = /** @class */ (function () {
         this.messageText = "";
     };
     ChatroomComponent.prototype.ngOnInit = function () {
-        //probably some message box asking you to login
         var _this = this;
+        this.username = localStorage.getItem('username');
         this.data.socket_messages().subscribe(function (message) {
-            console.log(message);
+            _this.messageList.push(message);
         });
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
@@ -239,6 +246,8 @@ var ChatroomComponent = /** @class */ (function () {
         this.data.user_list().subscribe(function (data) {
             _this.userList = data;
         });
+        this.container = document.getElementById("textBox");
+        this.container.scrollTop = this.container.scrollHeight;
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

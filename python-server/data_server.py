@@ -38,7 +38,7 @@ def get_all_messages():
     connect = create_connection()
     cursor = connect.cursor()
 
-    select_all = f'select * from messages inner join users on messages.user_id = users.user_id'
+    select_all = f'select * from messages inner join users on messages.user_id = users.user_id order by messages.message_id asc'
 
     cursor.execute(select_all)
     rows = cursor.fetchall()
