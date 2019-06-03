@@ -21,7 +21,16 @@ export class WebsocketService {
   //   });
   // }
 
-  sendMessage(message){
+  send_message(message) {
     this.socket.emit('message', message);
+    console.log(message);
+  }
+
+  socket_messages = () => {
+    return Observable.create((observer)=> {
+      this.socket.on('message', (message) => {
+        observer.next(message);
+      });
+    });
   }
 }

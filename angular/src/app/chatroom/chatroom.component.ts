@@ -35,10 +35,10 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
       message_time: message_time
     }
 
-    this.data.write_message(message).subscribe(data => {
-      console.log('post request success!');
-    });
-    this.data.send_message(message)
+    // this.data.write_message(message).subscribe(data => {
+    //   console.log('post request success!');
+    // });
+    this.web.send_message(message)
     this.messageText ="";
   }
 
@@ -46,13 +46,13 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.username = localStorage.getItem('username');
 
 
-    this.data.socket_messages().subscribe(message => {
-      this.messageList.push(message)
+    this.web.socket_messages().subscribe(message => {
+      this.messageList.push(message);
     })
 
     this.data.message_list().subscribe((data: any[]) => {
       this.messageList = data;
-    }); 
+    });
 
     this.data.user_list().subscribe((data: any[]) => {
       this.userList = data;

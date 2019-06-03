@@ -228,16 +228,16 @@ var ChatroomComponent = /** @class */ (function () {
             message: this.messageText,
             message_time: message_time
         };
-        this.data.write_message(message).subscribe(function (data) {
-            console.log('post request success!');
-        });
-        this.data.send_message(message);
+        // this.data.write_message(message).subscribe(data => {
+        //   console.log('post request success!');
+        // });
+        this.web.send_message(message);
         this.messageText = "";
     };
     ChatroomComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.username = localStorage.getItem('username');
-        this.data.socket_messages().subscribe(function (message) {
+        this.web.socket_messages().subscribe(function (message) {
             _this.messageList.push(message);
         });
         this.data.message_list().subscribe(function (data) {
@@ -277,43 +277,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-
-
 
 
 
 var DataService = /** @class */ (function () {
     function DataService(http) {
-        var _this = this;
         this.http = http;
-        this.url = 'http://localhost:8000';
-        this.socket_messages = function () {
-            return rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"].create(function (observer) {
-                _this.socket.on('message', function (message) {
-                    observer.next(message);
-                });
-            });
-        };
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_3__(this.url);
     }
     DataService.prototype.write_message = function (message) {
         return this.http.post('/messages', message);
     };
-    DataService.prototype.send_message = function (message) {
-        this.socket.emit('message', message);
-        console.log(message);
-    };
     DataService.prototype.message_list = function () {
         return this.http.get('/messages');
     };
-    ;
     DataService.prototype.user_list = function () {
         return this.http.get('/users');
     };
-    ;
     DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
@@ -341,12 +320,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
 
 
 
 var WebsocketService = /** @class */ (function () {
     function WebsocketService() {
+        var _this = this;
         this.url = 'http://localhost:8000';
+        this.socket_messages = function () {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
+                _this.socket.on('message', function (message) {
+                    observer.next(message);
+                });
+            });
+        };
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
     // socketStart() {
@@ -354,8 +343,9 @@ var WebsocketService = /** @class */ (function () {
     //     return res;
     //   });
     // }
-    WebsocketService.prototype.sendMessage = function (message) {
+    WebsocketService.prototype.send_message = function (message) {
         this.socket.emit('message', message);
+        console.log(message);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
