@@ -18,8 +18,8 @@ export class DataService {
   }
 
   check_user_database(user_id) {
-    const params = { params: new HttpParams().set('req', user_id) };
-    return this.http.get('/users?', params);
+    const params = { params: new HttpParams().set('user_id', user_id) };
+    return this.http.get('/users', params);
   }
 
   new_user(user) {

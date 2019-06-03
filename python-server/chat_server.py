@@ -38,10 +38,10 @@ def new_message(message, methods=['GET', 'POST']):
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
         if request.method =='GET':
-                q = request.args.get('user_id')
-                if q:
+                user_id = request.args.get('user_id')
+                if user_id:
                         for user in get_all_users():
-                                if str(user['username']) == q:
+                                if str(user['username'].lower()) == user_id.lower():
                                         return jsonify({"Found": "True"})
                                         # return jsonify(user)
                         return jsonify({"Error": "User Not Found"}), 404

@@ -60,9 +60,12 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     })
 
     if (localStorage.getItem('username') == null) {
-      var username = window.prompt("Enter your username", "username");
+      var response = window.prompt("Enter your username", "username");
+      var username = response.toLocaleLowerCase();
       this.data.check_user_database(username).subscribe(data =>
         console.log(data));
+      // If statement to return if the username already exists, then prompt to make a new username
+      // Else, if the local storage !== null, then it just loads properly and sets the username to the local storage value
     }
 
     this.container = document.getElementById("textBox");           
