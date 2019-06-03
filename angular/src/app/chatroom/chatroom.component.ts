@@ -24,8 +24,10 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   
   onEnter(){
     var today = new Date();
+
     var message_time = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()
      + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
+
     const message = {
         user: {
           username: 'Apple',
@@ -38,13 +40,12 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     // this.data.write_message(message).subscribe(data => {
     //   console.log('post request success!');
     // });
-    this.web.send_message(message)
+    this.web.send_message(message);
     this.messageText ="";
   }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
-
 
     this.web.socket_messages().subscribe(message => {
       this.messageList.push(message);
@@ -52,14 +53,19 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
     this.data.message_list().subscribe((data: any[]) => {
       this.messageList = data;
-    });
+    })
 
     this.data.user_list().subscribe((data: any[]) => {
       this.userList = data;
-    });    
+    })
+
+    if (localStorage.getItem('username') == null) {
+      var username = window.prompt("Enter your username", "username");
+      this.data.check_user_database(username).subscribe(data =>
+        console.log(data));
+    }
+
     this.container = document.getElementById("textBox");           
     this.container.scrollTop = this.container.scrollHeight; 
   }
-
-
 }

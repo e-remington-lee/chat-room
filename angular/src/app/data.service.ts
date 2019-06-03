@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,15 @@ export class DataService {
 
   message_list() {
     return this.http.get('/messages');
+  }
+
+  check_user_database(user_id) {
+    const params = { params: new HttpParams().set('req', user_id) };
+    return this.http.get('/users?', params);
+  }
+
+  new_user(user) {
+    return this.http.post('/users', user);
   }
 
   user_list() {

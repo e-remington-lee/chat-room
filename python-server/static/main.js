@@ -246,6 +246,12 @@ var ChatroomComponent = /** @class */ (function () {
         this.data.user_list().subscribe(function (data) {
             _this.userList = data;
         });
+        if (localStorage.getItem('username') == null) {
+            var username = window.prompt("Enter your username", "username");
+            this.data.check_user_database(username).subscribe(function (data) {
+                return console.log(data);
+            });
+        }
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
     };
@@ -289,6 +295,13 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.message_list = function () {
         return this.http.get('/messages');
+    };
+    DataService.prototype.check_user_database = function (user_id) {
+        var params = { params: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('req', user_id) };
+        return this.http.get('/users?', params);
+    };
+    DataService.prototype.new_user = function (user) {
+        return this.http.post('/users', user);
     };
     DataService.prototype.user_list = function () {
         return this.http.get('/users');

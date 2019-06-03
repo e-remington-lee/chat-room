@@ -41,8 +41,9 @@ def find_create_users():
                 q = request.args.get('user_id')
                 if q:
                         for user in get_all_users():
-                                if str(user['user_id']) == q:
-                                        return jsonify(user)
+                                if str(user['username']) == q:
+                                        return jsonify({"Found": "True"})
+                                        # return jsonify(user)
                         return jsonify({"Error": "User Not Found"}), 404
                 else:
                         return jsonify(get_all_users())
