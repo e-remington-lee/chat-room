@@ -249,9 +249,12 @@ var ChatroomComponent = /** @class */ (function () {
         if (localStorage.getItem('username') == null) {
             var response = window.prompt("Enter your username", "username");
             var username = response.toLocaleLowerCase();
-            this.data.check_user_database(username).subscribe(function (data) {
+            var check_database = this.data.check_user_database(username).subscribe(function (data) {
                 return console.log(data);
             });
+            // if (check_database == null) {
+            //   console.log('Did it!')
+            // }
             // If statement to return if the username already exists, then prompt to make a new username
             // Else, if the local storage !== null, then it just loads properly and sets the username to the local storage value
         }
