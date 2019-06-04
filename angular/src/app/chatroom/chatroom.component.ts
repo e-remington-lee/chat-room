@@ -18,20 +18,22 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   constructor(private data: DataService, private web: WebsocketService) { }
 
   ngAfterViewInit() {         
-    this.container = document.getElementById("textBox");           
-    this.container.scrollTop = this.container.scrollHeight;     
+    
   }  
   
   onEnter(){
+    this.container = document.getElementById("textBox");           
+    this.container.scrollTop = this.container.scrollHeight; 
     var today = new Date();
 
     var message_time = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()
      + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
+    localStorage.setItem('user_id', `${this.userList.length}`);
 
     const message = {
         user: {
-          username: 'Apple',
-          user_id: 4
+          username: localStorage.getItem('username'),
+          user_id: localStorage.getItem('user_id')
       },
       message: this.messageText,
       message_time: message_time
@@ -45,10 +47,17 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.container = document.getElementById("textBox");           
+    this.container.scrollTop = this.container.scrollHeight; 
+
     this.username = localStorage.getItem('username');
 
     this.web.socket_messages().subscribe(message => {
       this.messageList.push(message);
+    })
+
+    this.web.user_observable().subscribe(username => {
+      this.userList.push(username);
     })
 
     this.data.message_list().subscribe((data: any[]) => {
@@ -58,25 +67,25 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.data.user_list().subscribe((data: any[]) => {
       this.userList = data;
     })
-
+        
     if (localStorage.getItem('username') == null) {
       var response = window.prompt("Enter your username", "username");
       var username = response.toLocaleLowerCase();
       this.data.check_user_database(username).subscribe((data: Object) => {
-        if (data['Found']) {
-          console.log(data)
-        }
-      })
-    } else {
-      console.log('Not found, creating new user')
-    }
-
-        // if (check_database == null) {
-        //   console.log('Did it!')
-        // }
-      // If statement to return if the username already exists, then prompt to make a new username
-      // Else, if the local storage !== null, then it just loads properly and sets the username to the local storage value
-    this.container = document.getElementById("textBox");           
-    this.container.scrollTop = this.container.scrollHeight; 
+        if (data['Found']=='True') {
+          location.reload();
+        } else {
+          const new_user = {
+            username: response
+          }
+          localStorage.setItem('username', response);
+          this.data.create_user(new_user).subscribe(data => {
+            console.log('Created new user!!');
+          })
+          this.web.send_created_user(new_user);
+          console.log('Creating new user...');
+        };
+      });
+    };
   }
 }

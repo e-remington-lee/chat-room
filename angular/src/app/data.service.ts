@@ -22,7 +22,7 @@ export class DataService {
     return this.http.get('/users', params);
   }
 
-  new_user(user) {
+  create_user(user) {
     return this.http.post('/users', user);
   }
 

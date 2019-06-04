@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
-import { Observable } from 'rxjs';
+import { Observable, observable } from 'rxjs';
 
 
 @Injectable({
@@ -15,21 +15,26 @@ export class WebsocketService {
     this.socket = io(this.url);
    }
 
-  // socketStart() {
-  //   this.socket.on('message', (res) => {
-  //     return res;
-  //   });
-  // }
-
   send_message(message) {
     this.socket.emit('message', message);
-    console.log(message);
+  }
+  
+  send_created_user(username) {
+    this.socket.emit('users', username);
   }
 
   socket_messages = () => {
     return Observable.create((observer)=> {
       this.socket.on('message', (message) => {
         observer.next(message);
+      });
+    });
+  }
+
+  user_observable =() => {
+    return Observable.create((observer)=> {
+      this.socket.on('users', (username)=> {
+        observer.next(username);
       });
     });
   }

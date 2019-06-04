@@ -32,8 +32,12 @@ def get_post_messages():
 @socketio.on('message')
 def new_message(message, methods=['GET', 'POST']):
         print(f'recieved {message}')
-
         socketio.emit('message', message, broadcast=True)
+
+@socketio.on('users')
+def new_user(username, methods=['GET', 'POST']):
+        print(f'created {username}')
+        socketio.emit('users', username, broadcast=True)
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
@@ -43,7 +47,7 @@ def find_create_users():
                         for user in get_all_users():
                                 if str(user['username'].lower()) == user_id.lower():
                                         return jsonify({"Found": "True"})
-                                        # return jsonify(user)
+                                        
                         
                         return jsonify({"Found": "False"})
                 else:

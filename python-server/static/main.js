@@ -183,7 +183,7 @@ module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#activeUsers {\n  border-bottom: 1px solid black;\n  padding-bottom: 5px; }\n\n#userBox {\n  height: 450px;\n  overflow: auto; }\n\n#textBox {\n  height: 400px;\n  overflow: auto; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBVXpCO0VBQ0ksOEJBQThCO0VBQzlCLG1CQUFtQixFQUFBOztBQUV2QjtFQUNJLGFBQWE7RUFDYixjQUNKLEVBQUE7O0FBRUE7RUFDSSxhQUFhO0VBQ2IsY0FDSixFQUFBOztBQUNBO0VBQ0kscUJBQXFCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jaGF0cm9vbS9jaGF0cm9vbS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiN0aXRsZSB7XG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xufVxuLy8gI3VzZXJCb3gge1xuLy8gICAgIGhlaWdodDogNzAwcHg7XG4vLyB9XG5cbi8vICN0ZXh0Qm94IHtcbi8vICAgICBoZWlnaHQ6IDY1MHB4O1xuLy8gfVxuXG4jYWN0aXZlVXNlcnMge1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBibGFjaztcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xufVxuI3VzZXJCb3gge1xuICAgIGhlaWdodDogNDUwcHg7XG4gICAgb3ZlcmZsb3c6IGF1dG9cbn1cblxuI3RleHRCb3gge1xuICAgIGhlaWdodDogNDAwcHg7XG4gICAgb3ZlcmZsb3c6IGF1dG9cbn1cbiNzZWFyY2hCb3gge1xuICAgIG1hcmdpbjogMTBweCAwIDEwcHggMDtcbn0iXX0= */"
+module.exports = "#title {\n  margin: 10px 0 10px 0; }\n\n#userBox {\n  height: 700px;\n  overflow: auto; }\n\n#textBox {\n  height: 650px;\n  overflow: auto; }\n\n#activeUsers {\n  border-bottom: 1px solid black;\n  padding-bottom: 5px; }\n\n#searchBox {\n  margin: 10px 0 10px 0; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hhdHJvb20vRDpcXE1hc3Rlcm1pbmRcXENoYXQtcm9vbVxcYW5ndWxhci9zcmNcXGFwcFxcY2hhdHJvb21cXGNoYXRyb29tLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQXFCLEVBQUE7O0FBRXpCO0VBQ0ksYUFBYTtFQUNiLGNBRUosRUFBQTs7QUFFQTtFQUNJLGFBQWE7RUFDYixjQUNKLEVBQUE7O0FBRUE7RUFDSSw4QkFBOEI7RUFDOUIsbUJBQW1CLEVBQUE7O0FBV3ZCO0VBQ0kscUJBQXFCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jaGF0cm9vbS9jaGF0cm9vbS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiN0aXRsZSB7XG4gICAgbWFyZ2luOiAxMHB4IDAgMTBweCAwO1xufVxuI3VzZXJCb3gge1xuICAgIGhlaWdodDogNzAwcHg7XG4gICAgb3ZlcmZsb3c6IGF1dG9cblxufVxuXG4jdGV4dEJveCB7XG4gICAgaGVpZ2h0OiA2NTBweDtcbiAgICBvdmVyZmxvdzogYXV0b1xufVxuXG4jYWN0aXZlVXNlcnMge1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCBibGFjaztcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xufVxuLy8gI3VzZXJCb3gge1xuLy8gICAgIGhlaWdodDogNDUwcHg7XG4vLyAgICAgb3ZlcmZsb3c6IGF1dG9cbi8vIH1cblxuLy8gI3RleHRCb3gge1xuLy8gICAgIGhlaWdodDogNDAwcHg7XG4vLyAgICAgb3ZlcmZsb3c6IGF1dG9cbi8vIH1cbiNzZWFyY2hCb3gge1xuICAgIG1hcmdpbjogMTBweCAwIDEwcHggMDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -213,17 +213,18 @@ var ChatroomComponent = /** @class */ (function () {
         this.userList = [];
     }
     ChatroomComponent.prototype.ngAfterViewInit = function () {
-        this.container = document.getElementById("textBox");
-        this.container.scrollTop = this.container.scrollHeight;
     };
     ChatroomComponent.prototype.onEnter = function () {
+        this.container = document.getElementById("textBox");
+        this.container.scrollTop = this.container.scrollHeight;
         var today = new Date();
         var message_time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
             + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds();
+        localStorage.setItem('user_id', "" + this.userList.length);
         var message = {
             user: {
-                username: 'Apple',
-                user_id: 4
+                username: localStorage.getItem('username'),
+                user_id: localStorage.getItem('user_id')
             },
             message: this.messageText,
             message_time: message_time
@@ -236,9 +237,14 @@ var ChatroomComponent = /** @class */ (function () {
     };
     ChatroomComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.container = document.getElementById("textBox");
+        this.container.scrollTop = this.container.scrollHeight;
         this.username = localStorage.getItem('username');
         this.web.socket_messages().subscribe(function (message) {
             _this.messageList.push(message);
+        });
+        this.web.user_observable().subscribe(function (username) {
+            _this.userList.push(username);
         });
         this.data.message_list().subscribe(function (data) {
             _this.messageList = data;
@@ -250,21 +256,24 @@ var ChatroomComponent = /** @class */ (function () {
             var response = window.prompt("Enter your username", "username");
             var username = response.toLocaleLowerCase();
             this.data.check_user_database(username).subscribe(function (data) {
-                if (data['Found']) {
-                    console.log(data);
+                if (data['Found'] == 'True') {
+                    location.reload();
                 }
+                else {
+                    var new_user = {
+                        username: response
+                    };
+                    localStorage.setItem('username', response);
+                    _this.data.create_user(new_user).subscribe(function (data) {
+                        console.log('Created new user!!');
+                    });
+                    _this.web.send_created_user(new_user);
+                    console.log('Creating new user...');
+                }
+                ;
             });
         }
-        else {
-            console.log('Not found, creating new user');
-        }
-        // if (check_database == null) {
-        //   console.log('Did it!')
-        // }
-        // If statement to return if the username already exists, then prompt to make a new username
-        // Else, if the local storage !== null, then it just loads properly and sets the username to the local storage value
-        this.container = document.getElementById("textBox");
-        this.container.scrollTop = this.container.scrollHeight;
+        ;
     };
     ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -311,7 +320,7 @@ var DataService = /** @class */ (function () {
         var params = { params: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('user_id', user_id) };
         return this.http.get('/users', params);
     };
-    DataService.prototype.new_user = function (user) {
+    DataService.prototype.create_user = function (user) {
         return this.http.post('/users', user);
     };
     DataService.prototype.user_list = function () {
@@ -360,16 +369,20 @@ var WebsocketService = /** @class */ (function () {
                 });
             });
         };
+        this.user_observable = function () {
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
+                _this.socket.on('users', function (username) {
+                    observer.next(username);
+                });
+            });
+        };
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
-    // socketStart() {
-    //   this.socket.on('message', (res) => {
-    //     return res;
-    //   });
-    // }
     WebsocketService.prototype.send_message = function (message) {
         this.socket.emit('message', message);
-        console.log(message);
+    };
+    WebsocketService.prototype.send_created_user = function (username) {
+        this.socket.emit('users', username);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

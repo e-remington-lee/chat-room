@@ -1,27 +1,30 @@
 #title {
     margin: 10px 0 10px 0;
 }
-// #userBox {
-//     height: 700px;
-// }
+#userBox {
+    height: 700px;
+    overflow: auto
 
-// #textBox {
-//     height: 650px;
-// }
+}
+
+#textBox {
+    height: 650px;
+    overflow: auto
+}
 
 #activeUsers {
     border-bottom: 1px solid black;
     padding-bottom: 5px;
 }
-#userBox {
-    height: 450px;
-    overflow: auto
-}
+// #userBox {
+//     height: 450px;
+//     overflow: auto
+// }
 
-#textBox {
-    height: 400px;
-    overflow: auto
-}
+// #textBox {
+//     height: 400px;
+//     overflow: auto
+// }
 #searchBox {
     margin: 10px 0 10px 0;
 }
