@@ -10,6 +10,7 @@ import { WebsocketService } from '../websocket.service';
 export class ChatroomComponent implements OnInit, AfterViewInit {
 
   messageText: string;
+  currentUser: Object;
   username: string;
   messageList: any[]=[];
   userList: any[]=[];
@@ -33,15 +34,15 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     const message = {
         user: {
           username: localStorage.getItem('username'),
-          user_id: localStorage.getItem('user_id')
+          user_id: this.currentUser['user_id']
       },
       message: this.messageText,
       message_time: message_time
     }
 
-    // this.data.write_message(message).subscribe(data => {
-    //   console.log('post request success!');
-    // });
+    this.data.write_message(message).subscribe(data => {
+      console.log('post request success!');
+    });
     this.web.send_message(message);
     this.messageText ="";
   }
@@ -80,7 +81,8 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
           }
           localStorage.setItem('username', response);
           this.data.create_user(new_user).subscribe(data => {
-            console.log('Added new user to database');
+            this.currentUser = data
+            console.log(this.currentUser);
           })
           this.web.send_created_user(new_user);
           console.log('Creating new user...');

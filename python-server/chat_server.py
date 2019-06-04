@@ -56,9 +56,9 @@ def find_create_users():
                 data = request.get_json()
                 username = data['username']
 
-                create_user(username)
-
-                return jsonify(get_all_users()), 201
+                user = create_user(username)
+                print(user)
+                return jsonify(user), 201
 
 if __name__  == '__main__':
         socketio.run(app, debug=True, port=8000)

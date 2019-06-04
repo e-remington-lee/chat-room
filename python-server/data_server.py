@@ -19,20 +19,26 @@ def create_message(user_id, message):
     cursor = connect.cursor()
 
     cursor.execute(f'''INSERT INTO messages (message, user_id) VALUES ('{message}', {user_id})''')
+    
+
     connect.commit()
     cursor.close()
     connect.close()
     return None
 
-def create_user( username):
+def create_user(username):
     connect = create_connection()
     cursor = connect.cursor()
 
     cursor.execute(f"INSERT INTO users (username) VALUES ('{username}')")
     connect.commit()
+
+    cursor.execute(f"SELECT * FROM users WHERE username ='{username}'")
+    row = cursor.fetchone()
+
     cursor.close()
     connect.close()
-    return None
+    return {'user_id': row[0], 'username':row[1], 'created_date': row[2]}
 
 def get_all_messages():
     connect = create_connection()

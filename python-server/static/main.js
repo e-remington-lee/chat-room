@@ -224,14 +224,14 @@ var ChatroomComponent = /** @class */ (function () {
         var message = {
             user: {
                 username: localStorage.getItem('username'),
-                user_id: localStorage.getItem('user_id')
+                user_id: this.currentUser['user_id']
             },
             message: this.messageText,
             message_time: message_time
         };
-        // this.data.write_message(message).subscribe(data => {
-        //   console.log('post request success!');
-        // });
+        this.data.write_message(message).subscribe(function (data) {
+            console.log('post request success!');
+        });
         this.web.send_message(message);
         this.messageText = "";
     };
@@ -265,7 +265,8 @@ var ChatroomComponent = /** @class */ (function () {
                     };
                     localStorage.setItem('username', response);
                     _this.data.create_user(new_user).subscribe(function (data) {
-                        console.log('Added new user to database');
+                        _this.currentUser = data;
+                        console.log(_this.currentUser);
                     });
                     _this.web.send_created_user(new_user);
                     console.log('Creating new user...');
