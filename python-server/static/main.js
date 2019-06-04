@@ -239,7 +239,6 @@ var ChatroomComponent = /** @class */ (function () {
         var _this = this;
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
-        this.username = localStorage.getItem('username');
         this.web.socket_messages().subscribe(function (message) {
             _this.messageList.push(message);
         });
@@ -252,7 +251,8 @@ var ChatroomComponent = /** @class */ (function () {
         this.data.user_list().subscribe(function (data) {
             _this.userList = data;
         });
-        if (localStorage.getItem('username') == null) {
+        var currentUser = localStorage.getItem('username');
+        if (currentUser === null) {
             var response = window.prompt("Enter your username", "username");
             var username = response.toLocaleLowerCase();
             this.data.check_user_database(username).subscribe(function (data) {
@@ -265,7 +265,7 @@ var ChatroomComponent = /** @class */ (function () {
                     };
                     localStorage.setItem('username', response);
                     _this.data.create_user(new_user).subscribe(function (data) {
-                        console.log('Created new user!!');
+                        console.log('Added new user to database');
                     });
                     _this.web.send_created_user(new_user);
                     console.log('Creating new user...');

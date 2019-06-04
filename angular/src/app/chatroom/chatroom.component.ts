@@ -50,8 +50,6 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.container = document.getElementById("textBox");           
     this.container.scrollTop = this.container.scrollHeight; 
 
-    this.username = localStorage.getItem('username');
-
     this.web.socket_messages().subscribe(message => {
       this.messageList.push(message);
     })
@@ -67,8 +65,10 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.data.user_list().subscribe((data: any[]) => {
       this.userList = data;
     })
+
+    const currentUser = localStorage.getItem('username');
         
-    if (localStorage.getItem('username') == null) {
+    if (currentUser === null) {
       var response = window.prompt("Enter your username", "username");
       var username = response.toLocaleLowerCase();
       this.data.check_user_database(username).subscribe((data: Object) => {
@@ -80,7 +80,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
           }
           localStorage.setItem('username', response);
           this.data.create_user(new_user).subscribe(data => {
-            console.log('Created new user!!');
+            console.log('Added new user to database');
           })
           this.web.send_created_user(new_user);
           console.log('Creating new user...');
