@@ -38,7 +38,7 @@ def create_user(username):
 
     cursor.close()
     connect.close()
-    return {'user_id': row[0], 'username':row[1], 'created_date': row[2]}
+    return {'user_id': row[0], 'username': row[1], 'created_date': row[2]}
 
 def get_all_messages():
     connect = create_connection()

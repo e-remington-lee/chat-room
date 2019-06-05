@@ -11,7 +11,6 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
   messageText: string;
   currentUser: Object;
-  username: string;
   messageList: any[]=[];
   userList: any[]=[];
   container: HTMLElement;
@@ -29,12 +28,11 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
     var message_time = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()
      + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
-    localStorage.setItem('user_id', `${this.userList.length}`);
 
     const message = {
         user: {
           username: localStorage.getItem('username'),
-          user_id: this.currentUser['user_id']
+          user_id: localStorage.getItem('user_id')
       },
       message: this.messageText,
       message_time: message_time
@@ -69,22 +67,22 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
 
     const currentUser = localStorage.getItem('username');
         
-    if (currentUser === null) {
+    if (currentUser == null) {
       var response = window.prompt("Enter your username", "username");
       var username = response.toLocaleLowerCase();
       this.data.check_user_database(username).subscribe((data: Object) => {
         if (data['Found']=='True') {
           location.reload();
         } else {
-          const new_user = {
+          const newUser = {
             username: response
           }
-          localStorage.setItem('username', response);
-          this.data.create_user(new_user).subscribe(data => {
+          this.data.create_user(newUser).subscribe((data: Object) => {
             this.currentUser = data
-            console.log(this.currentUser);
+            localStorage.setItem('username', this.currentUser['username']);
+            localStorage.setItem('user_id', this.currentUser['user_id']);
           })
-          this.web.send_created_user(new_user);
+          this.web.send_created_user(newUser);
           console.log('Creating new user...');
         };
       });

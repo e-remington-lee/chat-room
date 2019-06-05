@@ -12,10 +12,6 @@ socketio = SocketIO(app)
 def root_server():
         return render_template('index.html')
 
-# @socketio.on('user')
-# def new_user(json, methods=['GET', 'POST']):
-#         socketio.emit('response', {'data': 'It worked!'})
-
 @app.route('/messages', methods=['GET', 'POST'])
 def get_post_messages():
         if request.method =='GET':
@@ -57,7 +53,7 @@ def find_create_users():
                 username = data['username']
 
                 user = create_user(username)
-                print(user)
+
                 return jsonify(user), 201
 
 if __name__  == '__main__':

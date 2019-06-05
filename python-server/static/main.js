@@ -220,11 +220,10 @@ var ChatroomComponent = /** @class */ (function () {
         var today = new Date();
         var message_time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
             + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds();
-        localStorage.setItem('user_id', "" + this.userList.length);
         var message = {
             user: {
                 username: localStorage.getItem('username'),
-                user_id: this.currentUser['user_id']
+                user_id: localStorage.getItem('user_id')
             },
             message: this.messageText,
             message_time: message_time
@@ -252,7 +251,7 @@ var ChatroomComponent = /** @class */ (function () {
             _this.userList = data;
         });
         var currentUser = localStorage.getItem('username');
-        if (currentUser === null) {
+        if (currentUser == null) {
             var response = window.prompt("Enter your username", "username");
             var username = response.toLocaleLowerCase();
             this.data.check_user_database(username).subscribe(function (data) {
@@ -260,15 +259,15 @@ var ChatroomComponent = /** @class */ (function () {
                     location.reload();
                 }
                 else {
-                    var new_user = {
+                    var newUser = {
                         username: response
                     };
-                    localStorage.setItem('username', response);
-                    _this.data.create_user(new_user).subscribe(function (data) {
+                    _this.data.create_user(newUser).subscribe(function (data) {
                         _this.currentUser = data;
-                        console.log(_this.currentUser);
+                        localStorage.setItem('username', _this.currentUser['username']);
+                        localStorage.setItem('user_id', _this.currentUser['user_id']);
                     });
-                    _this.web.send_created_user(new_user);
+                    _this.web.send_created_user(newUser);
                     console.log('Creating new user...');
                 }
                 ;
