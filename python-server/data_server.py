@@ -49,7 +49,7 @@ def get_all_messages():
 
     messages =[]
     for row in rows:
-        messages.append({'message_id': row[0], 'user': {'user_id': row[3], 'username': row[5]}, 'message': row[1]})
+        messages.append({'message_id': row[0], 'user': {'user_id': row[3], 'username': row[5]}, 'message': row[1], 'message_time': row[2]})
 
     message_list = {
         'message_list': messages
