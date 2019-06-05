@@ -3,8 +3,6 @@ import sqlalchemy
 import datetime
 
 #how was I supposed to know the host, I just guessed at localhost
-user_database = 'users'
-message_database = 'messages'
 
 def create_connection():
     return psycopg2.connect(
@@ -18,7 +16,7 @@ def create_message(user_id, message):
     connect = create_connection()
     cursor = connect.cursor()
 
-    cursor.execute(f'''INSERT INTO messages (message, user_id) VALUES ('{message}', {user_id})''')
+    cursor.execute("INSERT INTO messages (message, user_id) VALUES (%(message)s, %(user_id)s)", {"message": message, "user_id": user_id})
     
 
     connect.commit()
@@ -30,10 +28,10 @@ def create_user(username):
     connect = create_connection()
     cursor = connect.cursor()
 
-    cursor.execute(f"INSERT INTO users (username) VALUES ('{username}')")
+    cursor.execute("INSERT INTO users (username) VALUES (%(username)s)", {"username": username})
     connect.commit()
 
-    cursor.execute(f"SELECT * FROM users WHERE username ='{username}'")
+    cursor.execute("SELECT * FROM users WHERE username =%(username)s", {"username": username})
     row = cursor.fetchone()
 
     cursor.close()
@@ -44,7 +42,7 @@ def get_all_messages():
     connect = create_connection()
     cursor = connect.cursor()
 
-    select_all = f'select * from messages inner join users on messages.user_id = users.user_id order by messages.message_id asc'
+    select_all = 'select * from messages inner join users on messages.user_id = users.user_id order by messages.message_id asc'
 
     cursor.execute(select_all)
     rows = cursor.fetchall()
@@ -68,7 +66,7 @@ def get_all_users():
     connect = create_connection()
     cursor = connect.cursor()
 
-    select_all = f'select * from {user_database}'
+    select_all = 'select * from users'
 
     cursor.execute(select_all)
     rows = cursor.fetchall()
@@ -95,6 +93,3 @@ def get_all_users():
 
 # if __name__ =='__main__':
 #     main()
-
-get_all_messages()
-get_all_users()
