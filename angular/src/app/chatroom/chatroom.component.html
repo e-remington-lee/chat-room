@@ -18,7 +18,7 @@
                 <div class='col-8'>
                         <div class='card' id='textBox'>
                                 <div  class='card-body' id="messages">
-                                    <p *ngFor='let msg of messageList'><b>{{msg.user.username}}: </b>{{msg.message}}</p>
+                                    <p *ngFor='let msg of messageList'><b>{{msg.user.username}}: </b>{{msg.message}}<small>   {{msg.message_time}}</small></p>                                    
                                     
                                 </div> 
                             </div>
