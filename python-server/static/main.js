@@ -229,9 +229,9 @@ var ChatroomComponent = /** @class */ (function () {
             message_time: message_time
         };
         console.log(message);
-        // this.data.write_message(message).subscribe(data => {
-        //   console.log('post request success!');
-        // });
+        this.data.write_message(message).subscribe(function (data) {
+            console.log('post request success!');
+        });
         this.web.send_message(message);
         this.messageText = "";
     };

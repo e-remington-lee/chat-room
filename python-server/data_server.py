@@ -18,7 +18,6 @@ def create_message(user_id, message):
 
     cursor.execute("INSERT INTO messages (message, user_id) VALUES (%(message)s, %(user_id)s)", {"message": message, "user_id": user_id})
     
-
     connect.commit()
     cursor.close()
     connect.close()
@@ -83,13 +82,3 @@ def get_all_users():
     connect.close()
 
     return user_list['user_list']
-
-
-# def main ():
-#     cursor.execute(f"INSERT INTO users VALUES (4, 'Remington')")
-#     connect.commit()
-#     cursor.close()
-#     connect.close()
-
-# if __name__ =='__main__':
-#     main()
