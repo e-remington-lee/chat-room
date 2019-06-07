@@ -1,15 +1,15 @@
 import psycopg2
 import sqlalchemy
-import datetime
+import os
 
 #how was I supposed to know the host, I just guessed at localhost
 
 def create_connection():
     return psycopg2.connect(
-        host = "localhost",
-        database = "Chat_room",
-        user = "postgres",
-        password = "Bob!3489")
+        host = os.environ.get('Local_DB_host'),
+        database = os.environ.get('Local_DB_database'),
+        user = os.environ.get('Local_DB_username'),
+        password = os.environ.get('Local_DB_PW'))
 
 
 def create_message(user_id, message):
