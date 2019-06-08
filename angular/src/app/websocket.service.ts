@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class WebsocketService {
   
-  private url = 'http://localhost:8000';
-  private socket: SocketIOClient.Socket;
+  url = 'http://localhost:8000';
+  socket: SocketIOClient.Socket;
   
   constructor() {
     this.socket = io(this.url);

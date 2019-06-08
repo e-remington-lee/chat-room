@@ -38,13 +38,13 @@ def new_user(username, methods=['GET', 'POST']):
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
         if request.method =='GET':
-                user_id = request.args.get('user_id')
-                if user_id:
+                username = request.args.get('username')
+                if username:
                         for user in get_all_users():
-                                if str(user['username'].lower()) == user_id.lower():
-                                        return jsonify({"Found": "True"})
+                                if str(user['username'].lower()) == username.lower():
+                                        return jsonify(user), 200
                                         
-                        return jsonify({"Found": "False"})
+                        return '', 404
                 else:
                         return jsonify(get_all_users())
         elif request.method =='POST':

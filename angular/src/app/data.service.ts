@@ -17,9 +17,9 @@ export class DataService {
     return this.http.get('/messages');
   }
 
-  check_user_database(user_id) {
-    const params = { params: new HttpParams().set('user_id', user_id) };
-    return this.http.get('/users', params);
+  check_user_database(username) {
+    const params = new HttpParams().set('username', username)
+    return this.http.get('/users', {observe: 'response', params});
   }
 
   create_user(user) {

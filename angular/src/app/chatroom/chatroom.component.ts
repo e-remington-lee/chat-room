@@ -71,10 +71,13 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     if (currentUser == null) {
       var response = window.prompt("Enter your username", "username");
       var username = response.toLocaleLowerCase();
-      this.data.check_user_database(username).subscribe((data: Object) => {
-        if (data['Found']=='True') {
+      this.data.check_user_database(username).subscribe(resp => {
+        if (resp.status == 200) {
           location.reload();
-        } else {
+        } 
+      },
+      error => {
+        if (error.status == 404) {
           const newUser = {
             username: response
           }
@@ -88,5 +91,5 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
         };
       });
     };
+    }
   }
-}
