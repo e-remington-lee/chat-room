@@ -1,1 +1,1 @@
-web: gunicorn chat_server:app
+web: gunicorn cd ./python-server/chat_server:app
