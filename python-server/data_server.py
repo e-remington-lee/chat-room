@@ -2,15 +2,12 @@ import psycopg2
 import sqlalchemy
 import os
 
-#how was I supposed to know the host, I just guessed at localhost
-
 def create_connection():
     return psycopg2.connect(
         host = os.environ.get('Local_DB_host'),
         database = os.environ.get('Local_DB_database'),
         user = os.environ.get('Local_DB_username'),
         password = os.environ.get('Local_DB_PW'))
-
 
 def create_message(user_id, message):
     connect = create_connection()
@@ -48,15 +45,20 @@ def get_all_messages():
 
     messages =[]
     for row in rows:
-        messages.append({'message_id': row[0], 'user': {'user_id': row[3], 'username': row[5]}, 'message': row[1], 'message_time': row[2]})
+        messages.append({
+        'message_id': row[0],
+        'user': 
+                {'user_id': row[3],
+                'username': row[5]
+        },
+        'message': row[1], 
+        'message_time': row[2]
+        })
 
-    message_list = {
-        'message_list': messages
-    }
     cursor.close()
     connect.close()
 
-    return message_list['message_list']
+    return messages
 
 def find_specific_user():
     return None
@@ -72,13 +74,13 @@ def get_all_users():
 
     users =[]
     for row in rows:
-        users.append({'user_id': row[0], 'username': row[1], 'timestamp': row[2]})
-
-    user_list = {
-        'user_list': users
-    }
+        users.append({
+        'user_id': row[0],
+        'username': row[1], 
+        'timestamp': row[2]
+        })
 
     cursor.close()
     connect.close()
 
-    return user_list['user_list']
+    return users
