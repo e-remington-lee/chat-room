@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { WebsocketService } from '../websocket.service';
+import { UserService } from '../user.service';
   
 @Component({
   selector: 'app-chatroom',
@@ -15,7 +16,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   userList: any[]=[];
   container: HTMLElement;
 
-  constructor(private data: DataService, private web: WebsocketService) { }
+  constructor(private user: UserService, private data: DataService, private web: WebsocketService) { }
 
   ngAfterViewInit() {         
   }  
@@ -61,7 +62,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
       this.messageList = data;
     })
 
-    this.data.getUserList().subscribe((data: any[]) => {
+    this.user.getUserList().subscribe((data: any[]) => {
       this.userList = data;
     })
 
@@ -70,7 +71,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     if (currentUser == null) {
       var response = window.prompt("Enter your username", "username");
       var username = response.toLocaleLowerCase();
-      this.data.checkUserDatabase(username).subscribe(resp => {
+      this.user.checkUserDatabase(username).subscribe(resp => {
         if (resp.status == 200) {
           location.reload();
         } 
@@ -80,7 +81,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
           const newUser = {
             username: response
           }
-          this.data.createUser(newUser).subscribe((data: Object) => {
+          this.user.createUser(newUser).subscribe((data: Object) => {
             this.currentUser = data
             localStorage.setItem('username', this.currentUser['username']);
             localStorage.setItem('user_id', this.currentUser['user_id']);

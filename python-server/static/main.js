@@ -201,12 +201,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data.service */ "./src/app/data.service.ts");
 /* harmony import */ var _websocket_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../websocket.service */ "./src/app/websocket.service.ts");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../user.service */ "./src/app/user.service.ts");
+
 
 
 
 
 var ChatroomComponent = /** @class */ (function () {
-    function ChatroomComponent(data, web) {
+    function ChatroomComponent(user, data, web) {
+        this.user = user;
         this.data = data;
         this.web = web;
         this.messageList = [];
@@ -248,14 +251,14 @@ var ChatroomComponent = /** @class */ (function () {
         this.data.getMessageList().subscribe(function (data) {
             _this.messageList = data;
         });
-        this.data.getUserList().subscribe(function (data) {
+        this.user.getUserList().subscribe(function (data) {
             _this.userList = data;
         });
         var currentUser = localStorage.getItem('username');
         if (currentUser == null) {
             var response = window.prompt("Enter your username", "username");
             var username = response.toLocaleLowerCase();
-            this.data.checkUserDatabase(username).subscribe(function (resp) {
+            this.user.checkUserDatabase(username).subscribe(function (resp) {
                 if (resp.status == 200) {
                     location.reload();
                 }
@@ -264,7 +267,7 @@ var ChatroomComponent = /** @class */ (function () {
                     var newUser = {
                         username: response
                     };
-                    _this.data.createUser(newUser).subscribe(function (data) {
+                    _this.user.createUser(newUser).subscribe(function (data) {
                         _this.currentUser = data;
                         localStorage.setItem('username', _this.currentUser['username']);
                         localStorage.setItem('user_id', _this.currentUser['user_id']);
@@ -283,7 +286,7 @@ var ChatroomComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./chatroom.component.html */ "./src/app/chatroom/chatroom.component.html"),
             styles: [__webpack_require__(/*! ./chatroom.component.scss */ "./src/app/chatroom/chatroom.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _websocket_service__WEBPACK_IMPORTED_MODULE_3__["WebsocketService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"], _data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _websocket_service__WEBPACK_IMPORTED_MODULE_3__["WebsocketService"]])
     ], ChatroomComponent);
     return ChatroomComponent;
 }());
@@ -318,16 +321,6 @@ var DataService = /** @class */ (function () {
     DataService.prototype.getMessageList = function () {
         return this.http.get('/messages');
     };
-    DataService.prototype.checkUserDatabase = function (username) {
-        var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('username', username);
-        return this.http.get('/users', { observe: 'response', params: params });
-    };
-    DataService.prototype.createUser = function (user) {
-        return this.http.post('/users', user);
-    };
-    DataService.prototype.getUserList = function () {
-        return this.http.get('/users');
-    };
     DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
@@ -335,6 +328,49 @@ var DataService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], DataService);
     return DataService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/user.service.ts":
+/*!*********************************!*\
+  !*** ./src/app/user.service.ts ***!
+  \*********************************/
+/*! exports provided: UserService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+var UserService = /** @class */ (function () {
+    function UserService(http) {
+        this.http = http;
+    }
+    UserService.prototype.checkUserDatabase = function (username) {
+        var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('username', username);
+        return this.http.get('/users', { observe: 'response', params: params });
+    };
+    UserService.prototype.createUser = function (user) {
+        return this.http.post('/users', user);
+    };
+    UserService.prototype.getUserList = function () {
+        return this.http.get('/users');
+    };
+    UserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], UserService);
+    return UserService;
 }());
 
 
@@ -363,7 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 var WebsocketService = /** @class */ (function () {
     function WebsocketService() {
         var _this = this;
-        this.url = 'https://erl-chat-room.herokuapp.com/';
+        this.url = 'http://localhost:8000';
         this.receiveSocketMessages = function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
                 _this.socket.on('message', function (message) {
