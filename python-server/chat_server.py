@@ -26,12 +26,12 @@ def get_post_messages():
                         return jsonify(get_all_messages()), 201
 
 @socketio.on('message')
-def new_message(message, methods=['GET', 'POST']):
+def new_message(message):
         print(f'recieved {message}')
         socketio.emit('message', message, broadcast=True)
 
 @socketio.on('users')
-def new_user(username, methods=['GET', 'POST']):
+def new_user(username):
         print(f'created {username}')
         socketio.emit('users', username, broadcast=True)
 
@@ -58,4 +58,4 @@ def find_create_users():
 if __name__  == '__main__':
         socketio.run(app, debug=True, port=8000)
 
-socketio.run()
+# socketio.run()

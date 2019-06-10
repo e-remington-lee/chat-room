@@ -229,33 +229,33 @@ var ChatroomComponent = /** @class */ (function () {
             message_time: message_time
         };
         console.log(message);
-        this.data.write_message(message).subscribe(function (data) {
+        this.data.writeMessage(message).subscribe(function (data) {
             console.log('post request success!');
         });
-        this.web.send_message(message);
+        this.web.sendSocketMessage(message);
         this.messageText = "";
     };
     ChatroomComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
-        this.web.socket_messages().subscribe(function (message) {
+        this.web.receiveSocketMessages().subscribe(function (message) {
             _this.messageList.push(message);
         });
-        this.web.user_observable().subscribe(function (username) {
+        this.web.receiveSocketUsers().subscribe(function (username) {
             _this.userList.push(username);
         });
-        this.data.message_list().subscribe(function (data) {
+        this.data.getMessageList().subscribe(function (data) {
             _this.messageList = data;
         });
-        this.data.user_list().subscribe(function (data) {
+        this.data.getUserList().subscribe(function (data) {
             _this.userList = data;
         });
         var currentUser = localStorage.getItem('username');
         if (currentUser == null) {
             var response = window.prompt("Enter your username", "username");
             var username = response.toLocaleLowerCase();
-            this.data.check_user_database(username).subscribe(function (resp) {
+            this.data.checkUserDatabase(username).subscribe(function (resp) {
                 if (resp.status == 200) {
                     location.reload();
                 }
@@ -264,12 +264,12 @@ var ChatroomComponent = /** @class */ (function () {
                     var newUser = {
                         username: response
                     };
-                    _this.data.create_user(newUser).subscribe(function (data) {
+                    _this.data.createUser(newUser).subscribe(function (data) {
                         _this.currentUser = data;
                         localStorage.setItem('username', _this.currentUser['username']);
                         localStorage.setItem('user_id', _this.currentUser['user_id']);
                     });
-                    _this.web.send_created_user(newUser);
+                    _this.web.sendSocketUser(newUser);
                     console.log('Creating new user...');
                 }
                 ;
@@ -312,20 +312,20 @@ var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
-    DataService.prototype.write_message = function (message) {
+    DataService.prototype.writeMessage = function (message) {
         return this.http.post('/messages', message);
     };
-    DataService.prototype.message_list = function () {
+    DataService.prototype.getMessageList = function () {
         return this.http.get('/messages');
     };
-    DataService.prototype.check_user_database = function (username) {
+    DataService.prototype.checkUserDatabase = function (username) {
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]().set('username', username);
         return this.http.get('/users', { observe: 'response', params: params });
     };
-    DataService.prototype.create_user = function (user) {
+    DataService.prototype.createUser = function (user) {
         return this.http.post('/users', user);
     };
-    DataService.prototype.user_list = function () {
+    DataService.prototype.getUserList = function () {
         return this.http.get('/users');
     };
     DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -364,14 +364,14 @@ var WebsocketService = /** @class */ (function () {
     function WebsocketService() {
         var _this = this;
         this.url = 'http://localhost:8000';
-        this.socket_messages = function () {
+        this.receiveSocketMessages = function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
                 _this.socket.on('message', function (message) {
                     observer.next(message);
                 });
             });
         };
-        this.user_observable = function () {
+        this.receiveSocketUsers = function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
                 _this.socket.on('users', function (username) {
                     observer.next(username);
@@ -380,10 +380,10 @@ var WebsocketService = /** @class */ (function () {
         };
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
     }
-    WebsocketService.prototype.send_message = function (message) {
+    WebsocketService.prototype.sendSocketMessage = function (message) {
         this.socket.emit('message', message);
     };
-    WebsocketService.prototype.send_created_user = function (username) {
+    WebsocketService.prototype.sendSocketUser = function (username) {
         this.socket.emit('users', username);
     };
     WebsocketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([

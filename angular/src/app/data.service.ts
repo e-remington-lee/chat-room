@@ -9,24 +9,24 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  write_message(message) {
+  writeMessage(message) {
     return this.http.post('/messages', message);
   }
 
-  message_list() {
+  getMessageList() {
     return this.http.get('/messages');
   }
 
-  check_user_database(username) {
+  checkUserDatabase(username) {
     const params = new HttpParams().set('username', username)
     return this.http.get('/users', {observe: 'response', params});
   }
 
-  create_user(user) {
+  createUser(user) {
     return this.http.post('/users', user);
   }
 
-  user_list() {
+  getUserList() {
     return this.http.get('/users');
   }
 }

@@ -15,15 +15,15 @@ export class WebsocketService {
     this.socket = io(this.url);
    }
 
-  send_message(message) {
+   sendSocketMessage(message) {
     this.socket.emit('message', message);
   }
   
-  send_created_user(username) {
+  sendSocketUser(username) {
     this.socket.emit('users', username);
   }
 
-  socket_messages = () => {
+  receiveSocketMessages = () => {
     return Observable.create((observer)=> {
       this.socket.on('message', (message) => {
         observer.next(message);
@@ -31,7 +31,7 @@ export class WebsocketService {
     });
   }
 
-  user_observable =() => {
+  receiveSocketUsers =() => {
     return Observable.create((observer)=> {
       this.socket.on('users', (username)=> {
         observer.next(username);

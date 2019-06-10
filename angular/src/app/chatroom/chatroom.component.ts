@@ -39,10 +39,10 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     }
     console.log(message);
 
-    this.data.write_message(message).subscribe(data => {
+    this.data.writeMessage(message).subscribe(data => {
       console.log('post request success!');
     });
-    this.web.send_message(message);
+    this.web.sendSocketMessage(message);
     this.messageText ="";
   }
 
@@ -50,19 +50,19 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.container = document.getElementById("textBox");           
     this.container.scrollTop = this.container.scrollHeight; 
 
-    this.web.socket_messages().subscribe(message => {
+    this.web.receiveSocketMessages().subscribe(message => {
       this.messageList.push(message);
     })
 
-    this.web.user_observable().subscribe(username => {
+    this.web.receiveSocketUsers().subscribe(username => {
       this.userList.push(username);
     })
 
-    this.data.message_list().subscribe((data: any[]) => {
+    this.data.getMessageList().subscribe((data: any[]) => {
       this.messageList = data;
     })
 
-    this.data.user_list().subscribe((data: any[]) => {
+    this.data.getUserList().subscribe((data: any[]) => {
       this.userList = data;
     })
 
@@ -71,7 +71,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     if (currentUser == null) {
       var response = window.prompt("Enter your username", "username");
       var username = response.toLocaleLowerCase();
-      this.data.check_user_database(username).subscribe(resp => {
+      this.data.checkUserDatabase(username).subscribe(resp => {
         if (resp.status == 200) {
           location.reload();
         } 
@@ -81,12 +81,12 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
           const newUser = {
             username: response
           }
-          this.data.create_user(newUser).subscribe((data: Object) => {
+          this.data.createUser(newUser).subscribe((data: Object) => {
             this.currentUser = data
             localStorage.setItem('username', this.currentUser['username']);
             localStorage.setItem('user_id', this.currentUser['user_id']);
           })
-          this.web.send_created_user(newUser);
+          this.web.sendSocketUser(newUser);
           console.log('Creating new user...');
         };
       });
