@@ -18,7 +18,6 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   constructor(private data: DataService, private web: WebsocketService) { }
 
   ngAfterViewInit() {         
-    
   }  
   
   onEnter(){
@@ -91,5 +90,5 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
         };
       });
     };
-    }
   }
+}
