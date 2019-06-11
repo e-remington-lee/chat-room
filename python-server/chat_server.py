@@ -56,5 +56,5 @@ def find_create_users():
                 return jsonify(user), 201
 
 if __name__  == '__main__':
-        socketio.run(app)
+        socketio.run()
 
