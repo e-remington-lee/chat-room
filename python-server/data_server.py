@@ -1,13 +1,20 @@
 import psycopg2
 import sqlalchemy
+from boto.s3.connection import S3Connection
 import os
+
 
 def create_connection():
     return psycopg2.connect(
-        host = os.environ.get('Local_DB_host'),
-        database = os.environ.get('Local_DB_database'),
-        user = os.environ.get('Local_DB_username'),
-        password = os.environ.get('Local_DB_PW'))
+        # host = os.environ.get('Local_DB_host'),
+        # database = os.environ.get('Local_DB_database'),
+        # user = os.environ.get('Local_DB_username'),
+        # password = os.environ.get('Local_DB_PW')
+        host = S3Connection(os.environ['Local_DB_host']),
+        database = S3Connection(os.environ['Local_DB_database']),
+        user = S3Connection(os.environ['Local_DB_username']),
+        password = S3Connection(os.environ['Local_DB_PW'])
+        )
 
 def create_message(user_id, message):
     connect = create_connection()
