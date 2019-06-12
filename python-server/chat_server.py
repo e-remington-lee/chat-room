@@ -42,8 +42,7 @@ def find_create_users():
                 if username:
                         for user in get_all_users():
                                 if str(user['username'].lower()) == username.lower():
-                                        return jsonify(user), 200
-                                        
+                                        return jsonify(user), 200                                       
                         return '', 404
                 else:
                         return jsonify(get_all_users())
@@ -57,5 +56,5 @@ def find_create_users():
 
 if __name__  == '__main__':
         # socketio.run(app, debut=True, port=8000)
-        socketio.run(app, host='https://erl-chat-room.herokuapp.com/')
+        socketio.run(app)
 
