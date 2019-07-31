@@ -399,6 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 var WebsocketService = /** @class */ (function () {
     function WebsocketService() {
         var _this = this;
+        // url = 'http://localhost:8000'
         this.url = 'https://erl-chat-room.herokuapp.com/';
         this.receiveSocketMessages = function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
