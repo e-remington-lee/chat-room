@@ -399,8 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 var WebsocketService = /** @class */ (function () {
     function WebsocketService() {
         var _this = this;
-        // url = 'http://localhost:8000'
-        this.url = 'https://erl-chat-room.herokuapp.com';
+        this.url = 'http://localhost:8000';
         this.receiveSocketMessages = function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
                 _this.socket.on('message', function (message) {
@@ -415,7 +414,7 @@ var WebsocketService = /** @class */ (function () {
                 });
             });
         };
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url);
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url, { transports: ['websocket'] });
     }
     WebsocketService.prototype.sendSocketMessage = function (message) {
         this.socket.emit('message', message);

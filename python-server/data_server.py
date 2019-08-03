@@ -4,7 +4,6 @@ import psycopg2
 import sqlalchemy
 
 
-
 def create_connection():
     return psycopg2.connect(
         host = os.environ['db_host'],

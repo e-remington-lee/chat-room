@@ -53,6 +53,6 @@ def find_create_users():
                 return jsonify(user), 201
 
 if __name__  == '__main__':
+        print('running...')
         socketio.run(app, port=8000)
         # socketio.run(app)
-

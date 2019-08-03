@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class WebsocketService {
-  // url = 'http://localhost:8000'
-  url = 'https://erl-chat-room.herokuapp.com';
+  url = 'http://localhost:8000'
+  // url = 'https://erl-chat-room.herokuapp.com';
   socket: SocketIOClient.Socket;
   
   constructor() {
-    this.socket = io(this.url);
+    this.socket = io(this.url, {transports: ['websocket']});
    }
 
    sendSocketMessage(message) {
