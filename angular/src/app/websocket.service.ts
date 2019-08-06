@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class WebsocketService {
   // url = 'http://localhost:8000'
-  url = 'ws://erl-chat-room.herokuapp.com/';
+  url = 'wss://erl-chat-room.herokuapp.com/';
   socket: SocketIOClient.Socket;
   
   constructor() {
