@@ -20,29 +20,30 @@ export class ChatroomComponent implements OnInit {
 
   constructor(private user: UserService, private data: DataService, private web: WebsocketService, private modal: NgbModal) { }
 
-  ngAfterViewInit() {         
-  }  
-  
   onEnter(){
-    this.container = document.getElementById("textBox");           
-    this.container.scrollTop = this.container.scrollHeight; 
-    var today = new Date();
-
-    var message_time = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()
-     + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
-     
-    const message = {
-        user: {
-          username: localStorage.getItem('username'),
-          user_id: localStorage.getItem('user_id')
-      },
-      message: this.messageText,
-      message_time: message_time
+    if (this.messageText === "") {
+      return false
+    } else {
+      this.container = document.getElementById("textBox");           
+      this.container.scrollTop = this.container.scrollHeight; 
+      var today = new Date();
+  
+      var message_time = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()
+       + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
+       
+      const message = {
+          user: {
+            username: localStorage.getItem('username'),
+            user_id: localStorage.getItem('user_id')
+        },
+        message: this.messageText,
+        message_time: message_time
+      }
+      this.data.writeMessage(message).subscribe(data => {
+        this.web.sendSocketMessage(message);
+      });
+      this.messageText ="";
     }
-    this.data.writeMessage(message).subscribe(data => {
-    });
-    this.web.sendSocketMessage(message);
-    this.messageText ="";
   }
 
   modalOpen() {
@@ -58,20 +59,19 @@ export class ChatroomComponent implements OnInit {
 
     this.web.receiveSocketMessages().subscribe(message => {
       this.messageList.push(message);
-    })
+    });
 
     this.web.receiveSocketUsers().subscribe(username => {
       this.userList.push(username);
-    })
+    });
 
     this.data.getMessageList().subscribe((data: any[]) => {
       this.messageList = data;
-    })
+    });
 
     this.user.getUserList().subscribe((data: any[]) => {
       this.userList = data;
-    })
-
+    });
   }
 
 }

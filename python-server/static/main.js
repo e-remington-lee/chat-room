@@ -233,26 +233,29 @@ let ChatroomComponent = class ChatroomComponent {
         this.messageList = [];
         this.userList = [];
     }
-    ngAfterViewInit() {
-    }
     onEnter() {
-        this.container = document.getElementById("textBox");
-        this.container.scrollTop = this.container.scrollHeight;
-        var today = new Date();
-        var message_time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-            + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds();
-        const message = {
-            user: {
-                username: localStorage.getItem('username'),
-                user_id: localStorage.getItem('user_id')
-            },
-            message: this.messageText,
-            message_time: message_time
-        };
-        this.data.writeMessage(message).subscribe(data => {
-        });
-        this.web.sendSocketMessage(message);
-        this.messageText = "";
+        if (this.messageText === "") {
+            return false;
+        }
+        else {
+            this.container = document.getElementById("textBox");
+            this.container.scrollTop = this.container.scrollHeight;
+            var today = new Date();
+            var message_time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+                + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds();
+            const message = {
+                user: {
+                    username: localStorage.getItem('username'),
+                    user_id: localStorage.getItem('user_id')
+                },
+                message: this.messageText,
+                message_time: message_time
+            };
+            this.data.writeMessage(message).subscribe(data => {
+                this.web.sendSocketMessage(message);
+            });
+            this.messageText = "";
+        }
     }
     modalOpen() {
         let modalOptions = {
@@ -490,8 +493,6 @@ __webpack_require__.r(__webpack_exports__);
 
 let WebsocketService = class WebsocketService {
     constructor() {
-        // // url = 'http://localhost:8000'
-        // url = 'https://erl-chat-room.herokuapp.com/';
         this.url = window.location.href;
         this.receiveSocketMessages = () => {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create((observer) => {
