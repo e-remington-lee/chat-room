@@ -395,9 +395,9 @@ let LoginModalComponent = class LoginModalComponent {
                     this.currentUser = data;
                     localStorage.setItem('username', this.currentUser['username']);
                     localStorage.setItem('user_id', this.currentUser['user_id']);
+                    this.web.sendSocketUser(newUser);
                 });
                 alert(`Logged in as ${this.username}`);
-                this.web.sendSocketUser(newUser);
                 this.modalActive.close();
             }
         });
@@ -491,7 +491,7 @@ __webpack_require__.r(__webpack_exports__);
 let WebsocketService = class WebsocketService {
     constructor() {
         // url = 'http://localhost:8000'
-        this.url = 'wss://erl-chat-room.herokuapp.com/';
+        this.url = 'https://erl-chat-room.herokuapp.com/';
         this.receiveSocketMessages = () => {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create((observer) => {
                 this.socket.on('message', (message) => {
