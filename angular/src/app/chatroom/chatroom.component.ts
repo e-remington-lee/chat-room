@@ -20,6 +20,27 @@ export class ChatroomComponent implements OnInit {
 
   constructor(private user: UserService, private data: DataService, private web: WebsocketService, private modal: NgbModal) { }
 
+  ngOnInit() {
+    this.container = document.getElementById("textBox");           
+    this.container.scrollTop = this.container.scrollHeight; 
+
+    this.web.receiveSocketMessages().subscribe(message => {
+      this.messageList.push(message);
+    });
+
+    this.web.receiveSocketUsers().subscribe(username => {
+      this.userList.push(username);
+    });
+
+    this.data.getMessageList().subscribe((data: any[]) => {
+      this.messageList = data;
+    });
+
+    this.user.getUserList().subscribe((data: any[]) => {
+      this.userList = data;
+    });
+  }
+
   onEnter(){
     if (this.messageText === "") {
       return false
@@ -51,27 +72,6 @@ export class ChatroomComponent implements OnInit {
       backdrop: 'static'
     }
     const modal = this.modal.open(LoginModalComponent, modalOptions);
-  }
-
-  ngOnInit() {
-    this.container = document.getElementById("textBox");           
-    this.container.scrollTop = this.container.scrollHeight; 
-
-    this.web.receiveSocketMessages().subscribe(message => {
-      this.messageList.push(message);
-    });
-
-    this.web.receiveSocketUsers().subscribe(username => {
-      this.userList.push(username);
-    });
-
-    this.data.getMessageList().subscribe((data: any[]) => {
-      this.messageList = data;
-    });
-
-    this.user.getUserList().subscribe((data: any[]) => {
-      this.userList = data;
-    });
   }
 
 }

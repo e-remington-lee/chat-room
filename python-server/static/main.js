@@ -233,6 +233,22 @@ let ChatroomComponent = class ChatroomComponent {
         this.messageList = [];
         this.userList = [];
     }
+    ngOnInit() {
+        this.container = document.getElementById("textBox");
+        this.container.scrollTop = this.container.scrollHeight;
+        this.web.receiveSocketMessages().subscribe(message => {
+            this.messageList.push(message);
+        });
+        this.web.receiveSocketUsers().subscribe(username => {
+            this.userList.push(username);
+        });
+        this.data.getMessageList().subscribe((data) => {
+            this.messageList = data;
+        });
+        this.user.getUserList().subscribe((data) => {
+            this.userList = data;
+        });
+    }
     onEnter() {
         if (this.messageText === "") {
             return false;
@@ -262,22 +278,6 @@ let ChatroomComponent = class ChatroomComponent {
             backdrop: 'static'
         };
         const modal = this.modal.open(_login_modal_login_modal_component__WEBPACK_IMPORTED_MODULE_6__["LoginModalComponent"], modalOptions);
-    }
-    ngOnInit() {
-        this.container = document.getElementById("textBox");
-        this.container.scrollTop = this.container.scrollHeight;
-        this.web.receiveSocketMessages().subscribe(message => {
-            this.messageList.push(message);
-        });
-        this.web.receiveSocketUsers().subscribe(username => {
-            this.userList.push(username);
-        });
-        this.data.getMessageList().subscribe((data) => {
-            this.messageList = data;
-        });
-        this.user.getUserList().subscribe((data) => {
-            this.userList = data;
-        });
     }
 };
 ChatroomComponent.ctorParameters = () => [
