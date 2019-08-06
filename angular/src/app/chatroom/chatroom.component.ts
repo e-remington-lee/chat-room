@@ -39,10 +39,8 @@ export class ChatroomComponent implements OnInit {
       message: this.messageText,
       message_time: message_time
     }
-    console.log(message);
+     this.data.writeMessage(message).subscribe(data => {
 
-    this.data.writeMessage(message).subscribe(data => {
-      console.log('post request success!');
     });
     this.web.sendSocketMessage(message);
     this.messageText ="";

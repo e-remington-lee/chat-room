@@ -18,7 +18,7 @@ module.exports = "<app-chatroom></app-chatroom>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card text-center' id='title'>\n            <div class='card-body'>\n                <h2 class='card-text'>Chat Application</h2>\n                <button type='button' (click)='modalOpen()'>Login</button>\n                <!-- <app-login-modal></app-login-modal> -->\n            </div>\n            \n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card' id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let user of userList'><b>{{user.username}}</b></p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div  class='card-body' id=\"messages\">\n                                    <p *ngFor='let msg of messageList'><b>{{msg.user.username}}: </b>{{msg.message}}</p>\n                                    \n                                </div> \n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='messageText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n            <div id='github-link'>\n                <h3 class = 'font-italic border-bottom mt-3 text-dark'>GitHub Repository</h3>\n                <a class='ml-3 text-dark' href='https://github.com/e-remington-lee/chat-room'>https://github.com/e-remington-lee/chat-room</a>\n            </div>\n    </div>\n\n</body>\n</html>\n"
+module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card text-center' id='title'>\n            <div class='card-body'>\n                <h2 class='card-text'>Chat Application</h2>\n                <button type='button' (click)='modalOpen()'>Login</button>\n            </div>\n            \n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card' id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let user of userList'><b>{{user.username}}</b></p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div  class='card-body' id=\"messages\">\n                                    <p *ngFor='let msg of messageList'><b>{{msg.user.username}}: </b>{{msg.message}}</p>\n                                    \n                                </div> \n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='messageText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n            <div id='github-link'>\n                <h3 class = 'font-italic border-bottom mt-3 text-dark'>GitHub Repository</h3>\n                <a class='ml-3 text-dark' href='https://github.com/e-remington-lee/chat-room'>https://github.com/e-remington-lee/chat-room</a>\n            </div>\n    </div>\n\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -29,7 +29,7 @@ module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\"> -->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"exampleModalLabel\">Login</h5>\n      </div>\n      <div class=\"modal-body\">\n        <form>\n          <div class=\"form-group\">\n            <label class=\"col-form-label\"><b>Username</b></label>\n            <p class=\"text-danger\">{{errorMessage}}</p>\n            <input maxlength=\"10\" type=\"text\" class=\"form-control\" id=\"loginBar\"\n             name=\"loginBar\" [(ngModel)]=\"username\" (keyup.enter)='login()' placeholder=\"Enter username\">\n          </div>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)='closeModal()'>Close</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)='login()'>Login</button>\n      </div>\n    </div>\n  <!-- </div>\n</div> -->"
+module.exports = "    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"exampleModalLabel\">Login</h5>\n      </div>\n      <div class=\"modal-body\">\n        <form>\n          <div class=\"form-group\">\n            <label class=\"col-form-label\"><b>Username</b></label>\n            <p class=\"text-danger\">{{errorMessage}}</p>\n            <input maxlength=\"10\" type=\"text\" class=\"form-control\" id=\"loginBar\"\n             name=\"loginBar\" [(ngModel)]=\"username\" (keyup.enter)='login()' placeholder=\"Enter username\">\n          </div>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)='closeModal()'>Close</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)='login()'>Login</button>\n      </div>\n    </div>\n"
 
 /***/ }),
 
@@ -249,9 +249,7 @@ let ChatroomComponent = class ChatroomComponent {
             message: this.messageText,
             message_time: message_time
         };
-        console.log(message);
         this.data.writeMessage(message).subscribe(data => {
-            console.log('post request success!');
         });
         this.web.sendSocketMessage(message);
         this.messageText = "";
@@ -492,7 +490,8 @@ __webpack_require__.r(__webpack_exports__);
 
 let WebsocketService = class WebsocketService {
     constructor() {
-        this.url = 'http://localhost:8000';
+        // url = 'http://localhost:8000'
+        this.url = 'https://erl-chat-room.herokuapp.com';
         this.receiveSocketMessages = () => {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create((observer) => {
                 this.socket.on('message', (message) => {
