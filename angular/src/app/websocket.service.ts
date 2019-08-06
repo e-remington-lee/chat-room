@@ -12,7 +12,7 @@ export class WebsocketService {
   socket: SocketIOClient.Socket;
   
   constructor() {
-    this.socket = io(this.url, {transports: ['websocket']});
+    this.socket = io(this.url);
    }
 
    sendSocketMessage(message) {

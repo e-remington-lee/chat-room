@@ -30,7 +30,7 @@ export class ChatroomComponent implements OnInit {
 
     var message_time = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()
      + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
-
+     
     const message = {
         user: {
           username: localStorage.getItem('username'),
@@ -39,8 +39,7 @@ export class ChatroomComponent implements OnInit {
       message: this.messageText,
       message_time: message_time
     }
-     this.data.writeMessage(message).subscribe(data => {
-
+    this.data.writeMessage(message).subscribe(data => {
     });
     this.web.sendSocketMessage(message);
     this.messageText ="";
