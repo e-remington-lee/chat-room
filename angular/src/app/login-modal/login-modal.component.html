@@ -1,0 +1,23 @@
+<!-- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label class="col-form-label"><b>Username</b></label>
+            <p class="text-danger">{{errorMessage}}</p>
+            <input maxlength="10" type="text" class="form-control" id="loginBar"
+             name="loginBar" [(ngModel)]="username" (keyup.enter)='login()' placeholder="Enter username">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)='closeModal()'>Close</button>
+        <button type="button" class="btn btn-primary" (click)='login()'>Login</button>
+      </div>
+    </div>
+  <!-- </div>
+</div> -->

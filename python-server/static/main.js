@@ -18,7 +18,18 @@ module.exports = "<app-chatroom></app-chatroom>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card text-center' id='title'>\n            <div class='card-body'>\n                <h2 class='card-text'>Chat Application</h2>\n                <button>Login</button>\n            </div>\n            \n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card' id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let user of userList'><b>{{user.username}}</b></p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div  class='card-body' id=\"messages\">\n                                    <p *ngFor='let msg of messageList'><b>{{msg.user.username}}: </b>{{msg.message}}</p>\n                                    \n                                </div> \n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='messageText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n            <div id='github-link'>\n                <h3 class = 'font-italic border-bottom mt-3 text-dark'>GitHub Repository</h3>\n                <a class='ml-3 text-dark' href='https://github.com/e-remington-lee/chat-room'>https://github.com/e-remington-lee/chat-room</a>\n            </div>\n    </div>\n\n</body>\n</html>\n"
+module.exports = "<html>\n<body>\n    <div class='container-fluid'>\n        <div class='card text-center' id='title'>\n            <div class='card-body'>\n                <h2 class='card-text'>Chat Application</h2>\n                <button type='button' (click)='modalOpen()'>Login</button>\n                <!-- <app-login-modal></app-login-modal> -->\n            </div>\n            \n        </div>\n        <div class='row'>\n                <div class='col-4'>\n                        <div class='card' id='userBox'>\n                                <div class='card-body'>\n                                    <h3 class='card-text' id='activeUsers'>Active Users</h3>\n                                    <p *ngFor='let user of userList'><b>{{user.username}}</b></p>\n                                </div>\n                            </div> \n                </div>\n                <div class='col-8'>\n                        <div class='card' id='textBox'>\n                                <div  class='card-body' id=\"messages\">\n                                    <p *ngFor='let msg of messageList'><b>{{msg.user.username}}: </b>{{msg.message}}</p>\n                                    \n                                </div> \n                            </div>\n                            <div>\n                                <input class='form-control' id='searchBox' [(ngModel)]='messageText' placeholder=\"What would you like to say?\" (keyup.enter)='onEnter()'> \n                            </div>  \n                </div>\n            </div>\n            <div id='github-link'>\n                <h3 class = 'font-italic border-bottom mt-3 text-dark'>GitHub Repository</h3>\n                <a class='ml-3 text-dark' href='https://github.com/e-remington-lee/chat-room'>https://github.com/e-remington-lee/chat-room</a>\n            </div>\n    </div>\n\n</body>\n</html>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/login-modal/login-modal.component.html":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/login-modal/login-modal.component.html ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!-- <div class=\"modal fade\" id=\"loginModal\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\"> -->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"exampleModalLabel\">Login</h5>\n      </div>\n      <div class=\"modal-body\">\n        <form>\n          <div class=\"form-group\">\n            <label class=\"col-form-label\"><b>Username</b></label>\n            <p class=\"text-danger\">{{errorMessage}}</p>\n            <input maxlength=\"10\" type=\"text\" class=\"form-control\" id=\"loginBar\"\n             name=\"loginBar\" [(ngModel)]=\"username\" (keyup.enter)='login()' placeholder=\"Enter username\">\n          </div>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)='closeModal()'>Close</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)='login()'>Login</button>\n      </div>\n    </div>\n  <!-- </div>\n</div> -->"
 
 /***/ }),
 
@@ -135,6 +146,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chatroom/chatroom.component */ "./src/app/chatroom/chatroom.component.ts");
+/* harmony import */ var _login_modal_login_modal_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./login-modal/login-modal.component */ "./src/app/login-modal/login-modal.component.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+
+
 
 
 
@@ -149,18 +164,23 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
-            _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_7__["ChatroomComponent"]
+            _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_7__["ChatroomComponent"],
+            _login_modal_login_modal_component__WEBPACK_IMPORTED_MODULE_8__["LoginModalComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"]
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+            _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__["NgbModule"]
+        ],
+        entryComponents: [
+            _login_modal_login_modal_component__WEBPACK_IMPORTED_MODULE_8__["LoginModalComponent"]
         ],
         exports: [
             _chatroom_chatroom_component__WEBPACK_IMPORTED_MODULE_7__["ChatroomComponent"]
         ],
-        providers: [],
+        providers: [_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_9__["NgbActiveModal"]],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
     })
 ], AppModule);
@@ -195,16 +215,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data.service */ "./src/app/data.service.ts");
 /* harmony import */ var _websocket_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../websocket.service */ "./src/app/websocket.service.ts");
 /* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../user.service */ "./src/app/user.service.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+/* harmony import */ var _login_modal_login_modal_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../login-modal/login-modal.component */ "./src/app/login-modal/login-modal.component.ts");
+
+
 
 
 
 
 
 let ChatroomComponent = class ChatroomComponent {
-    constructor(user, data, web) {
+    constructor(user, data, web, modal) {
         this.user = user;
         this.data = data;
         this.web = web;
+        this.modal = modal;
         this.messageList = [];
         this.userList = [];
     }
@@ -231,6 +256,12 @@ let ChatroomComponent = class ChatroomComponent {
         this.web.sendSocketMessage(message);
         this.messageText = "";
     }
+    modalOpen() {
+        let modalOptions = {
+            backdrop: 'static'
+        };
+        const modal = this.modal.open(_login_modal_login_modal_component__WEBPACK_IMPORTED_MODULE_6__["LoginModalComponent"], modalOptions);
+    }
     ngOnInit() {
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
@@ -246,37 +277,13 @@ let ChatroomComponent = class ChatroomComponent {
         this.user.getUserList().subscribe((data) => {
             this.userList = data;
         });
-        const currentUser = localStorage.getItem('username');
-        if (currentUser == null) {
-            var response = window.prompt("Enter your username", "username");
-            var username = response.toLocaleLowerCase();
-            this.user.checkUserDatabase(username).subscribe(resp => {
-                if (resp.status == 200) {
-                    location.reload();
-                }
-            }, error => {
-                if (error.status == 404) {
-                    const newUser = {
-                        username: response
-                    };
-                    this.user.createUser(newUser).subscribe((data) => {
-                        this.currentUser = data;
-                        localStorage.setItem('username', this.currentUser['username']);
-                        localStorage.setItem('user_id', this.currentUser['user_id']);
-                    });
-                    this.web.sendSocketUser(newUser);
-                    console.log('Creating new user...');
-                }
-                ;
-            });
-        }
-        ;
     }
 };
 ChatroomComponent.ctorParameters = () => [
     { type: _user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] },
     { type: _data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"] },
-    { type: _websocket_service__WEBPACK_IMPORTED_MODULE_3__["WebsocketService"] }
+    { type: _websocket_service__WEBPACK_IMPORTED_MODULE_3__["WebsocketService"] },
+    { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModal"] }
 ];
 ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -284,7 +291,7 @@ ChatroomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./chatroom.component.html */ "./node_modules/raw-loader/index.js!./src/app/chatroom/chatroom.component.html"),
         styles: [__webpack_require__(/*! ./chatroom.component.scss */ "./src/app/chatroom/chatroom.component.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"], _data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _websocket_service__WEBPACK_IMPORTED_MODULE_3__["WebsocketService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"], _data_service__WEBPACK_IMPORTED_MODULE_2__["DataService"], _websocket_service__WEBPACK_IMPORTED_MODULE_3__["WebsocketService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModal"]])
 ], ChatroomComponent);
 
 
@@ -327,6 +334,93 @@ DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
 ], DataService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/login-modal/login-modal.component.scss":
+/*!********************************************************!*\
+  !*** ./src/app/login-modal/login-modal.component.scss ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luLW1vZGFsL2xvZ2luLW1vZGFsLmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/login-modal/login-modal.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/login-modal/login-modal.component.ts ***!
+  \******************************************************/
+/*! exports provided: LoginModalComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModalComponent", function() { return LoginModalComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../user.service */ "./src/app/user.service.ts");
+/* harmony import */ var _websocket_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../websocket.service */ "./src/app/websocket.service.ts");
+
+
+
+
+
+let LoginModalComponent = class LoginModalComponent {
+    constructor(user, web, modalActive) {
+        this.user = user;
+        this.web = web;
+        this.modalActive = modalActive;
+        this.currentUser = [];
+    }
+    ngOnInit() {
+    }
+    login() {
+        if (this.username.length > 10 || this.username.length < 2) {
+            this.errorMessage = 'Username must be between 2 and 10 characters';
+            return false;
+        }
+        this.user.checkUserDatabase(this.username.toLocaleLowerCase()).subscribe(resp => {
+            if (resp.status === 200) {
+                this.errorMessage = 'Username already taken';
+            }
+        }, error => {
+            if (error.status === 404) {
+                const newUser = {
+                    username: this.username
+                };
+                this.user.createUser(newUser).subscribe((data) => {
+                    this.currentUser = data;
+                    localStorage.setItem('username', this.currentUser['username']);
+                    localStorage.setItem('user_id', this.currentUser['user_id']);
+                });
+                alert(`Logged in as ${this.username}`);
+                this.web.sendSocketUser(newUser);
+                this.modalActive.close();
+            }
+        });
+    }
+    closeModal() {
+        this.modalActive.close();
+    }
+};
+LoginModalComponent.ctorParameters = () => [
+    { type: _user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
+    { type: _websocket_service__WEBPACK_IMPORTED_MODULE_4__["WebsocketService"] },
+    { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbActiveModal"] }
+];
+LoginModalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-login-modal',
+        template: __webpack_require__(/*! raw-loader!./login-modal.component.html */ "./node_modules/raw-loader/index.js!./src/app/login-modal/login-modal.component.html"),
+        styles: [__webpack_require__(/*! ./login-modal.component.scss */ "./src/app/login-modal/login-modal.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _websocket_service__WEBPACK_IMPORTED_MODULE_4__["WebsocketService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbActiveModal"]])
+], LoginModalComponent);
 
 
 

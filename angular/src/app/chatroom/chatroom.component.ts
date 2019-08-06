@@ -1,14 +1,16 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { WebsocketService } from '../websocket.service';
 import { UserService } from '../user.service';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
   
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
   styleUrls: ['./chatroom.component.scss']
 })
-export class ChatroomComponent implements OnInit, AfterViewInit {
+export class ChatroomComponent implements OnInit {
 
   messageText: string;
   currentUser: Object;
@@ -16,7 +18,7 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
   userList: any[]=[];
   container: HTMLElement;
 
-  constructor(private user: UserService, private data: DataService, private web: WebsocketService) { }
+  constructor(private user: UserService, private data: DataService, private web: WebsocketService, private modal: NgbModal) { }
 
   ngAfterViewInit() {         
   }  
@@ -46,6 +48,13 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
     this.messageText ="";
   }
 
+  modalOpen() {
+    let modalOptions: NgbModalOptions = {
+      backdrop: 'static'
+    }
+    const modal = this.modal.open(LoginModalComponent, modalOptions);
+  }
+
   ngOnInit() {
     this.container = document.getElementById("textBox");           
     this.container.scrollTop = this.container.scrollHeight; 
@@ -66,30 +75,6 @@ export class ChatroomComponent implements OnInit, AfterViewInit {
       this.userList = data;
     })
 
-    const currentUser = localStorage.getItem('username');
-        
-    if (currentUser == null) {
-      var response = window.prompt("Enter your username", "username");
-      var username = response.toLocaleLowerCase();
-      this.user.checkUserDatabase(username).subscribe(resp => {
-        if (resp.status == 200) {
-          location.reload();
-        } 
-      },
-      error => {
-        if (error.status == 404) {
-          const newUser = {
-            username: response
-          }
-          this.user.createUser(newUser).subscribe((data: Object) => {
-            this.currentUser = data
-            localStorage.setItem('username', this.currentUser['username']);
-            localStorage.setItem('user_id', this.currentUser['user_id']);
-          })
-          this.web.sendSocketUser(newUser);
-          console.log('Creating new user...');
-        };
-      });
-    };
   }
+
 }
