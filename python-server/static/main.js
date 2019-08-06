@@ -398,9 +398,9 @@ let LoginModalComponent = class LoginModalComponent {
                     this.currentUser = data;
                     localStorage.setItem('username', this.currentUser['username']);
                     localStorage.setItem('user_id', this.currentUser['user_id']);
-                    this.web.sendSocketUser(newUser);
                 });
                 alert(`Logged in as ${this.username}`);
+                this.web.sendSocketUser(newUser);
                 this.modalActive.close();
             }
         });
