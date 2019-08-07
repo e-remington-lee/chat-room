@@ -27,11 +27,11 @@ def get_post_messages():
 
 @socketio.on('message')
 def new_message(message):
-        socketio.emit('message', message, broadcast=True)
+        emit('message', message, broadcast=True)
 
 @socketio.on('users')
 def new_user(username):
-        socketio.emit('users', username, broadcast=True)
+        emit('users', username, broadcast=True)
 
 @app.route('/users', methods=['GET','POST'])
 def find_create_users():
@@ -54,5 +54,5 @@ def find_create_users():
 
 if __name__  == '__main__':
         print('running...')
-        # socketio.run(app, debug=True, port=8000)
-        socketio.run(app)
+        socketio.run(app, debug=True, port=8000)
+        # socketio.run(app)

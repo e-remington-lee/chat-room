@@ -496,6 +496,7 @@ let WebsocketService = class WebsocketService {
         this.url = window.location.href;
         this.receiveSocketMessages = () => {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create((observer) => {
+                console.log('message recieved');
                 this.socket.on('message', (message) => {
                     observer.next(message);
                 });
@@ -511,6 +512,7 @@ let WebsocketService = class WebsocketService {
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"](this.url, { transports: ['websocket'] });
     }
     sendSocketMessage(message) {
+        console.log('message sent');
         this.socket.emit('message', message);
     }
     sendSocketUser(username) {

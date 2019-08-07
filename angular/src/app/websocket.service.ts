@@ -15,6 +15,7 @@ export class WebsocketService {
    }
 
    sendSocketMessage(message) {
+     console.log('message sent')
     this.socket.emit('message', message);
   }
   
@@ -24,6 +25,7 @@ export class WebsocketService {
 
   receiveSocketMessages = () => {
     return Observable.create((observer)=> {
+      console.log('message recieved')
       this.socket.on('message', (message) => {
         observer.next(message);
       });
