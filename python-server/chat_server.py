@@ -3,7 +3,7 @@ import requests
 import json
 import sqlalchemy
 from data_server import get_all_messages, get_all_users, create_message, create_user
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 socketio = SocketIO(app)

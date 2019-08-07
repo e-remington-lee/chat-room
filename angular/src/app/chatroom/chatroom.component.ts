@@ -53,10 +53,10 @@ export class ChatroomComponent implements OnInit {
        + ' ' + today.getHours() +':'+today.getMinutes() + ':' + today.getSeconds() + ':' + today.getMilliseconds()
        
       const message = {
-          user: {
+        user: {
             username: localStorage.getItem('username'),
             user_id: localStorage.getItem('user_id')
-        },
+          },
         message: this.messageText,
         message_time: message_time
       }
