@@ -508,7 +508,7 @@ let WebsocketService = class WebsocketService {
                 });
             });
         };
-        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(this.url, { transports: ['websocket'] });
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"](this.url, { transports: ['websocket'] });
     }
     sendSocketMessage(message) {
         this.socket.emit('message', message);

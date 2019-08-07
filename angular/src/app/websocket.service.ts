@@ -11,7 +11,7 @@ export class WebsocketService {
   socket: SocketIOClient.Socket;
   
   constructor() {
-    this.socket = io(this.url, {transports: ['websocket']});
+    this.socket = io.connect(this.url, {transports: ['websocket']});
    }
 
    sendSocketMessage(message) {
