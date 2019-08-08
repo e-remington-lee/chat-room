@@ -513,9 +513,11 @@ let WebsocketService = class WebsocketService {
     }
     sendSocketMessage(message) {
         console.log('message sent');
+        // this.socket.nsp = '/messages';
         this.socket.emit('message', message);
     }
     sendSocketUser(username) {
+        // this.socket.nsp = '/users'
         this.socket.emit('users', username);
     }
 };
