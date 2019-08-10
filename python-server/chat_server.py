@@ -56,8 +56,8 @@ def find_create_users():
                 return jsonify(user), 201
 
 if __name__  == '__main__':
-        # app.run(debug=True, port=8000)
+
         print('running...')
-        wsgi.server(eventlet_socket, app, debug=True)
-        # socketio.run(app, debug=True, port=8000)
+        # wsgi.server(eventlet_socket, app, debug=True)
+        socketio.run(app, debug=True, port=8000)
         # socketio.run(app)
