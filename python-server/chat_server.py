@@ -56,7 +56,6 @@ def find_create_users():
                 return jsonify(user), 201
 
 if __name__  == '__main__':
-
         print('running...')
         # wsgi.server(eventlet.listen(('erl-chat-room.herokuapp', 8000)), app, debug=True)
         socketio.run(app, debug=True)
