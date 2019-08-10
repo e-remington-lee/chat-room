@@ -9,7 +9,7 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-eventlet_socket = eventlet.listen(('localhost', 8000))
+eventlet_socket = eventlet.listen(('erl-chat-room.herokuapp', 8000))
 
 @app.route('/')
 def root_server():
