@@ -25,10 +25,14 @@ export class ChatroomComponent implements OnInit {
     this.container.scrollTop = this.container.scrollHeight; 
 
     this.web.receiveSocketMessages().subscribe(message => {
+      console.log(`Pushed message ${message}`)
+      console.log(this.messageList)
       this.messageList.push(message);
     });
 
     this.web.receiveSocketUsers().subscribe(username => {
+      console.log(`Pushed username ${username}`)
+      console.log(this.userList)
       this.userList.push(username);
     });
 

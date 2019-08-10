@@ -9,7 +9,7 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-# eventlet_socket = eventlet.listen(('erl-chat-room.herokuapp', 8000))
+
 
 @app.route('/')
 def root_server():
@@ -58,6 +58,6 @@ def find_create_users():
 if __name__  == '__main__':
 
         print('running...')
-        # wsgi.server(eventlet_socket, app, debug=True)
+        # wsgi.server(eventlet.listen(('erl-chat-room.herokuapp', 8000)), app, debug=True)
         socketio.run(app, debug=True)
         # socketio.run(app)

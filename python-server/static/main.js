@@ -237,9 +237,13 @@ let ChatroomComponent = class ChatroomComponent {
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
         this.web.receiveSocketMessages().subscribe(message => {
+            console.log(`Pushed message ${message}`);
+            console.log(this.messageList);
             this.messageList.push(message);
         });
         this.web.receiveSocketUsers().subscribe(username => {
+            console.log(`Pushed username ${username}`);
+            console.log(this.userList);
             this.userList.push(username);
         });
         this.data.getMessageList().subscribe((data) => {
