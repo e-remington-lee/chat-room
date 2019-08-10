@@ -27,8 +27,9 @@ export class WebsocketService {
 
   receiveSocketMessages = () => {
     return Observable.create((observer)=> {
-      console.log('message recieved')
+ 
       this.socket.on('message', (message) => {
+        console.log(message);
         observer.next(message);
       });
     });
@@ -37,6 +38,7 @@ export class WebsocketService {
   receiveSocketUsers =() => {
     return Observable.create((observer)=> {
       this.socket.on('users', (username)=> {
+        console.log(username);
         observer.next(username);
       });
     });

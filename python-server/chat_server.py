@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, render_template, request
+import eventlet
+from eventlet import wsgi
 import requests
 import json
 import sqlalchemy
@@ -7,6 +9,7 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+eventlet_socket = eventlet.listen(('localhost', 8000))
 
 @app.route('/')
 def root_server():
@@ -55,5 +58,6 @@ def find_create_users():
 if __name__  == '__main__':
         # app.run(debug=True, port=8000)
         print('running...')
-        socketio.run(app, debug=True, port=8000)
+        wsgi.server(eventlet_socket, app, debug=True)
+        # socketio.run(app, debug=True, port=8000)
         # socketio.run(app)
