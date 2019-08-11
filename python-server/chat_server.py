@@ -1,6 +1,4 @@
 from flask import Flask, jsonify, render_template, request
-import eventlet
-from eventlet import wsgi
 import requests
 import json
 import sqlalchemy
@@ -57,6 +55,4 @@ def find_create_users():
 
 if __name__  == '__main__':
         print('running...')
-        # wsgi.server(eventlet.listen(('erl-chat-room.herokuapp', 8000)), app, debug=True)
-        socketio.run(app, debug=True)
-        # socketio.run(app)
+        socketio.run(app)
