@@ -15,20 +15,17 @@ export class WebsocketService {
    }
 
    sendSocketMessage(message) {
-     console.log('message sent')
-    // this.socket.nsp = '/messages';
+
     this.socket.emit('message', message);
   }
   
   sendSocketUser(username) {
-    // this.socket.nsp = '/users'
     this.socket.emit('users', username);
   }
 
   receiveSocketMessages = () => {
     return Observable.create((observer)=> {
       this.socket.on('message', (message) => {
-        console.log(`websocket service received message: ${message}`);
         observer.next(message);
       });
     });
@@ -37,7 +34,6 @@ export class WebsocketService {
   receiveSocketUsers =() => {
     return Observable.create((observer)=> {
       this.socket.on('users', (username)=> {
-        console.log(`websocket service received username: ${username}`);
         observer.next(username);
       });
     });

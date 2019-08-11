@@ -237,13 +237,9 @@ let ChatroomComponent = class ChatroomComponent {
         this.container = document.getElementById("textBox");
         this.container.scrollTop = this.container.scrollHeight;
         this.web.receiveSocketMessages().subscribe(message => {
-            console.log(`Pushed message ${message}`);
-            console.log(this.messageList);
             this.messageList.push(message);
         });
         this.web.receiveSocketUsers().subscribe(username => {
-            console.log(`Pushed username ${username}`);
-            console.log(this.userList);
             this.userList.push(username);
         });
         this.data.getMessageList().subscribe((data) => {
@@ -390,11 +386,7 @@ let LoginModalComponent = class LoginModalComponent {
             return false;
         }
         this.user.checkUserDatabase(this.username.toLocaleLowerCase()).subscribe(resp => {
-            if (resp.status === 200) {
-                this.errorMessage = 'Username already taken';
-            }
-        }, error => {
-            if (error.status === 404) {
+            if (resp.status === 201) {
                 const newUser = {
                     username: this.username
                 };
@@ -406,6 +398,10 @@ let LoginModalComponent = class LoginModalComponent {
                 alert(`Logged in as ${this.username}`);
                 this.web.sendSocketUser(newUser);
                 this.modalActive.close();
+            }
+        }, error => {
+            if (error.status === 401) {
+                this.errorMessage = 'Username already taken';
             }
         });
     }
@@ -501,7 +497,6 @@ let WebsocketService = class WebsocketService {
         this.receiveSocketMessages = () => {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create((observer) => {
                 this.socket.on('message', (message) => {
-                    console.log(`websocket service received message: ${message}`);
                     observer.next(message);
                 });
             });
@@ -509,7 +504,6 @@ let WebsocketService = class WebsocketService {
         this.receiveSocketUsers = () => {
             return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create((observer) => {
                 this.socket.on('users', (username) => {
-                    console.log(`websocket service received username: ${username}`);
                     observer.next(username);
                 });
             });
@@ -517,12 +511,9 @@ let WebsocketService = class WebsocketService {
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__["connect"](this.url, { transports: ['websocket'] });
     }
     sendSocketMessage(message) {
-        console.log('message sent');
-        // this.socket.nsp = '/messages';
         this.socket.emit('message', message);
     }
     sendSocketUser(username) {
-        // this.socket.nsp = '/users'
         this.socket.emit('users', username);
     }
 };

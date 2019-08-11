@@ -25,24 +25,23 @@ export class LoginModalComponent implements OnInit {
       return false
     }
     this.user.checkUserDatabase(this.username.toLocaleLowerCase()).subscribe(resp => {
-      if (resp.status === 200) {
-        this.errorMessage = 'Username already taken';
+      if (resp.status === 201) {
+        const newUser = {
+        username: this.username
       }
+      this.user.createUser(newUser).subscribe((data: any[]) => {
+        this.currentUser = data;
+        localStorage.setItem('username', this.currentUser['username']);
+        localStorage.setItem('user_id', this.currentUser['user_id']); 
+      })
+      alert(`Logged in as ${this.username}`)
+      this.web.sendSocketUser(newUser);
+      this.modalActive.close()
+  } 
     },
     error => {
-      if (error.status === 404) {
-            const newUser = {
-            username: this.username
-          }
-          this.user.createUser(newUser).subscribe((data: any[]) => {
-            this.currentUser = data;
-            localStorage.setItem('username', this.currentUser['username']);
-            localStorage.setItem('user_id', this.currentUser['user_id']);
-            
-          })
-          alert(`Logged in as ${this.username}`)
-          this.web.sendSocketUser(newUser);
-          this.modalActive.close()
+      if (error.status === 401) {
+        this.errorMessage = 'Username already taken';
       }
     });
   }
