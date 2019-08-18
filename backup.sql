@@ -5,7 +5,7 @@
 -- Dumped from database version 11.3
 -- Dumped by pg_dump version 11.3
 
--- Started on 2019-06-07 10:37:15
+-- Started on 2019-08-18 15:02:44
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -20,15 +20,15 @@ SET row_security = off;
 
 --
 -- TOC entry 2826 (class 1262 OID 16393)
--- Name: d9hdg34bpa471h; Type: DATABASE; Schema: -; Owner: postgres
+-- Name: Chat_room; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE "d9hdg34bpa471h" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
+CREATE DATABASE "Chat_room" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
 
 
-ALTER DATABASE "d9hdg34bpa471h" OWNER TO postgres;
+ALTER DATABASE "Chat_room" OWNER TO postgres;
 
-\connect "d9hdg34bpa471h"
+\connect "Chat_room"
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -167,7 +167,7 @@ ALTER TABLE ONLY public.messages
     ADD CONSTRAINT fk_messages_users FOREIGN KEY (user_id) REFERENCES public.users(user_id);
 
 
--- Completed on 2019-06-07 10:37:15
+-- Completed on 2019-08-18 15:02:44
 
 --
 -- PostgreSQL database dump complete
