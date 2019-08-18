@@ -20,15 +20,15 @@ SET row_security = off;
 
 --
 -- TOC entry 2826 (class 1262 OID 16393)
--- Name: Chat_room; Type: DATABASE; Schema: -; Owner: postgres
+-- Name: d9hdg34bpa471h; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE "Chat_room" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
+CREATE DATABASE "d9hdg34bpa471h" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
 
 
-ALTER DATABASE "Chat_room" OWNER TO postgres;
+ALTER DATABASE "d9hdg34bpa471h" OWNER TO postgres;
 
-\connect "Chat_room"
+\connect "d9hdg34bpa471h"
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
