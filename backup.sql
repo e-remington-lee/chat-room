@@ -5,7 +5,7 @@
 -- Dumped from database version 11.3
 -- Dumped by pg_dump version 11.3
 
--- Started on 2019-08-18 15:02:44
+-- Started on 2019-08-18 15:12:21
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -159,15 +159,15 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 2699 (class 2606 OID 16458)
+-- TOC entry 2699 (class 2606 OID 16787)
 -- Name: messages fk_messages_users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.messages
-    ADD CONSTRAINT fk_messages_users FOREIGN KEY (user_id) REFERENCES public.users(user_id);
+    ADD CONSTRAINT fk_messages_users FOREIGN KEY (user_id) REFERENCES public.users(user_id) ON DELETE CASCADE;
 
 
--- Completed on 2019-08-18 15:02:44
+-- Completed on 2019-08-18 15:12:21
 
 --
 -- PostgreSQL database dump complete
