@@ -44,6 +44,9 @@ export class ChatroomComponent implements OnInit {
   onEnter(){
     if (this.messageText === "") {
       return false
+    } else if (localStorage.getItem('username') === null || localStorage.getItem('user_id') === null) {
+      alert('You must log in first');
+      return false
     } else {
       this.container = document.getElementById("textBox");           
       this.container.scrollTop = this.container.scrollHeight; 
